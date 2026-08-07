@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(79, 140, 255, 0.07), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(34, 211, 238, 0.05), transparent 35%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(79, 140, 255, 0.35);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #4f8cff;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-bg-surface border border-border rounded-lg transition-colors duration-200;
+  }
+  .card:hover {
+    @apply border-border-strong;
+  }
+
+  .kicker {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-accent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-bright hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-md border border-border-strong bg-bg-raised px-4 py-2.5 text-sm font-medium text-text transition-all duration-200 hover:border-accent hover:-translate-y-0.5;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded border border-border-strong bg-bg-raised px-2 py-0.5 font-mono text-[11px] text-text-muted;
+  }
+
+  .section {
+    @apply mx-auto w-full max-w-5xl px-6 py-20 md:px-8;
+  }
+
+  .log-divider {
+    @apply flex items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-text-faint;
+  }
+  .log-divider::before,
+  .log-divider::after {
+    content: "";
+    @apply h-px flex-1 bg-border;
+  }
+}
