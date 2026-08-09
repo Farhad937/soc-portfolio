@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { ShieldHalf, LogOut } from "lucide-react";
 import { getAuthenticatedUser } from "@/lib/supabase/auth-server";
+import AdminSidebar from "@/components/admin-sidebar";
 import { logout } from "../actions";
 
 /**
@@ -18,7 +19,7 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
   return (
     <div className="flex min-h-screen flex-col bg-bg text-text">
       <header className="border-b border-border">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
+        <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2 font-semibold tracking-tight">
             <ShieldHalf className="h-5 w-5 text-accent" />
             <span>Admin</span>
@@ -31,7 +32,10 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
           </form>
         </div>
       </header>
-      <main className="flex-1">{children}</main>
+      <div className="flex flex-1">
+        <AdminSidebar />
+        <main className="flex-1 overflow-x-hidden">{children}</main>
+      </div>
     </div>
   );
 }
