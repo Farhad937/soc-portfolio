@@ -93,6 +93,15 @@ export async function getAllCertificationsAdmin(): Promise<AdminCertificationRow
   return data ?? [];
 }
 
+/** Full row for the edit form. */
+export async function getCertificationByIdAdmin(id: string) {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.from("certifications").select("*").eq("id", id).maybeSingle();
+  if (error) throw new Error(`getCertificationByIdAdmin: ${error.message}`);
+  return data;
+}
+
 export type AdminTimelineRow = {
   id: string;
   title: string;
