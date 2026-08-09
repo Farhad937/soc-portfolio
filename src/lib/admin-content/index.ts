@@ -64,6 +64,15 @@ export async function getAllWriteupsAdmin(): Promise<AdminWriteupRow[]> {
   return data ?? [];
 }
 
+/** Full row for the edit form. */
+export async function getWriteupByIdAdmin(id: string) {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.from("writeups").select("*").eq("id", id).maybeSingle();
+  if (error) throw new Error(`getWriteupByIdAdmin: ${error.message}`);
+  return data;
+}
+
 export type AdminCertificationRow = {
   id: string;
   name: string;

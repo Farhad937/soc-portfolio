@@ -38,3 +38,34 @@ export async function ensureUniqueSlug(
   }
   throw new Error(`ensureUniqueSlug: could not find a unique slug for "${baseSlug}"`);
 }
+
+export function arrayFromCsv(value: FormDataEntryValue | null): string[] {
+  if (!value || typeof value !== "string") return [];
+  return value
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+export function arrayFromLines(value: FormDataEntryValue | null): string[] {
+  if (!value || typeof value !== "string") return [];
+  return value
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+/**
+ * Parses "Label | https://url" lines into { label, url } objects — the
+ * format the Write-up form's References textarea uses. Lines without a
+ * "|" are skipped rather than erroring, so a stray blank line doesn't
+ * break the whole save.
+ */
+export function referencesFromLines(value: FormDataEntryValue | null): { label: string; url: string }[] {
+  return arrayFromLines(value)
+    .map((line) => {
+      const [label, url] = line.split("|").map((s) => s.trim());
+      return label && url ? { label, url } : null;
+    })
+    .filter((r): r is { label: string; url: string } => r !== null);
+}
