@@ -4,9 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X, ShieldHalf, Search } from "lucide-react";
-import { navLinks, site } from "@/lib/site";
+import { navLinks } from "@/lib/site";
+import type { getSiteSettings } from "@/lib/content/site-settings";
 
-export default function Nav() {
+type SiteSettings = Awaited<ReturnType<typeof getSiteSettings>>;
+
+// navLinks stays a static import deliberately — nav structure is
+// application configuration, not CMS content (see the CMS architecture
+// notes: navigation/layout/UI components remain static for now).
+export default function Nav({ site }: { site: SiteSettings }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -20,7 +26,7 @@ export default function Nav() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
             </span>
-            STATUS: {site.status}
+            STATUS: {site.statusText}
           </span>
           <span>{site.location.toUpperCase()}</span>
         </div>

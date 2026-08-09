@@ -34,6 +34,15 @@ export async function getAllProjectsAdmin(): Promise<AdminProjectRow[]> {
   return data ?? [];
 }
 
+/** Full row for the edit form — every column, unlike the listing above. */
+export async function getProjectByIdAdmin(id: string) {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.from("projects").select("*").eq("id", id).maybeSingle();
+  if (error) throw new Error(`getProjectByIdAdmin: ${error.message}`);
+  return data;
+}
+
 export type AdminWriteupRow = {
   id: string;
   slug: string;

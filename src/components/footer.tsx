@@ -1,7 +1,9 @@
 import { Github, Linkedin, Mail, Terminal } from "lucide-react";
-import { site } from "@/lib/site";
+import type { getSiteSettings } from "@/lib/content/site-settings";
 
-export default function Footer() {
+type SiteSettings = Awaited<ReturnType<typeof getSiteSettings>>;
+
+export default function Footer({ site }: { site: SiteSettings }) {
   return (
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-10 md:flex-row md:items-center md:justify-between md:px-8">
@@ -14,13 +16,13 @@ export default function Footer() {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <a href={site.links.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent" aria-label="GitHub">
+          <a href={site.githubUrl} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent" aria-label="GitHub">
             <Github className="h-5 w-5" />
           </a>
-          <a href={site.links.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent" aria-label="LinkedIn">
+          <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent" aria-label="LinkedIn">
             <Linkedin className="h-5 w-5" />
           </a>
-          <a href={site.links.tryhackme} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent" aria-label="TryHackMe">
+          <a href={site.tryhackmeUrl} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent" aria-label="TryHackMe">
             <Terminal className="h-5 w-5" />
           </a>
           <a href={`mailto:${site.email}`} className="text-text-muted hover:text-accent" aria-label="Email">
