@@ -1,14 +1,16 @@
 import SectionHeading from "@/components/section-heading";
 import { site as staticSite } from "@/lib/site";
 import { getSiteSettings } from "@/lib/content/site-settings";
+import { getExperience } from "@/lib/content/experience";
 
 export const metadata = { title: `About — ${staticSite.name}` };
 export const revalidate = 3600;
 
 export default async function AboutPage() {
-  const site = await getSiteSettings();
+  const [site, experience] = await Promise.all([getSiteSettings(), getExperience()]);
 
   return (
+    <>
     <section className="section">
       <SectionHeading kicker="// About" title="About Me" />
 
@@ -61,5 +63,46 @@ export default async function AboutPage() {
         </div>
       </div>
     </section>
+
+    {experience.length > 0 && (
+      <section className="section border-t border-border">
+        <SectionHeading kicker="// Career" title="Experience" />
+        <div className="space-y-6">
+          {experience.map((entry) => (
+            <div key={entry.id} className="card p-6">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="text-lg font-semibold text-text">
+                  {entry.position} <span className="text-text-muted">· {entry.company}</span>
+                </h3>
+                {(entry.start_date || entry.is_current) && (
+                  <p className="font-mono text-xs text-text-faint">
+                    {entry.start_date}
+                    {entry.start_date && " – "}
+                    {entry.is_current ? "Present" : entry.end_date}
+                  </p>
+                )}
+              </div>
+              {entry.location && <p className="mt-1 text-sm text-text-faint">{entry.location}</p>}
+              {entry.description && <p className="mt-3 text-text-muted">{entry.description}</p>}
+              {entry.achievements.length > 0 && (
+                <ul className="mt-3 list-inside list-disc space-y-1 text-text-muted">
+                  {entry.achievements.map((a) => (
+                    <li key={a}>{a}</li>
+                  ))}
+                </ul>
+              )}
+              {entry.technologies.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {entry.technologies.map((t) => (
+                    <span key={t} className="tag">{t}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+    </>
   );
 }

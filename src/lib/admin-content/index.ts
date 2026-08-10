@@ -159,3 +159,33 @@ export async function getSiteSettingsAdmin() {
   if (error) throw new Error(`getSiteSettingsAdmin: ${error.message}`);
   return data;
 }
+
+export type AdminExperienceRow = {
+  id: string;
+  company: string;
+  position: string;
+  is_current: boolean;
+  content_status: string;
+  order_index: number;
+  updated_at: string;
+};
+
+export async function getAllExperienceAdmin(): Promise<AdminExperienceRow[]> {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase
+    .from("experience")
+    .select("id, company, position, is_current, content_status, order_index, updated_at")
+    .order("order_index", { ascending: true });
+  if (error) throw new Error(`getAllExperienceAdmin: ${error.message}`);
+  return data ?? [];
+}
+
+/** Full row for the edit form. */
+export async function getExperienceByIdAdmin(id: string) {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.from("experience").select("*").eq("id", id).maybeSingle();
+  if (error) throw new Error(`getExperienceByIdAdmin: ${error.message}`);
+  return data;
+}
