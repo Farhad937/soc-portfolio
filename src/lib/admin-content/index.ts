@@ -189,3 +189,12 @@ export async function getExperienceByIdAdmin(id: string) {
   if (error) throw new Error(`getExperienceByIdAdmin: ${error.message}`);
   return data;
 }
+
+/** Full row for the edit form. */
+export async function getTimelineEntryByIdAdmin(id: string) {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.from("timeline_entries").select("*").eq("id", id).maybeSingle();
+  if (error) throw new Error(`getTimelineEntryByIdAdmin: ${error.message}`);
+  return data;
+}
