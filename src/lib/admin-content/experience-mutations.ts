@@ -154,4 +154,5 @@ export async function reorderExperience(id: string, direction: "up" | "down") {
   await supabase.from("experience").update({ order_index: a.order_index }).eq("id", b.id);
 
   revalidatePath("/admin/experience");
+  revalidatePath("/about");
 }

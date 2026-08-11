@@ -150,4 +150,5 @@ export async function reorderCertification(id: string, direction: "up" | "down")
   await supabase.from("certifications").update({ order_index: a.order_index }).eq("id", b.id);
 
   revalidatePath("/admin/certifications");
+  revalidatePath("/certifications");
 }

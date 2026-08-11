@@ -181,4 +181,5 @@ export async function reorderProject(id: string, direction: "up" | "down") {
   await supabase.from("projects").update({ order_index: a.order_index }).eq("id", b.id);
 
   revalidatePath("/admin/projects");
+  revalidatePath("/projects");
 }

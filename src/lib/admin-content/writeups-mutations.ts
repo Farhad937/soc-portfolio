@@ -166,4 +166,5 @@ export async function reorderWriteup(id: string, direction: "up" | "down") {
   await supabase.from("writeups").update({ order_index: a.order_index }).eq("id", b.id);
 
   revalidatePath("/admin/writeups");
+  revalidatePath("/writeups");
 }
