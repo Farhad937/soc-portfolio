@@ -2,12 +2,13 @@ import SectionHeading from "@/components/section-heading";
 import { site as staticSite } from "@/lib/site";
 import { getSiteSettings } from "@/lib/content/site-settings";
 import { getExperience } from "@/lib/content/experience";
+import { getEducation } from "@/lib/content/education";
 
 export const metadata = { title: `About — ${staticSite.name}` };
 export const revalidate = 3600;
 
 export default async function AboutPage() {
-  const [site, experience] = await Promise.all([getSiteSettings(), getExperience()]);
+  const [site, experience, education] = await Promise.all([getSiteSettings(), getExperience(), getEducation()]);
 
   return (
     <>
@@ -97,6 +98,39 @@ export default async function AboutPage() {
                     <span key={t} className="tag">{t}</span>
                   ))}
                 </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {education.length > 0 && (
+      <section className="section border-t border-border">
+        <SectionHeading kicker="// Academics" title="Education" />
+        <div className="space-y-6">
+          {education.map((entry) => (
+            <div key={entry.id} className="card p-6">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="text-lg font-semibold text-text">
+                  {entry.degree} <span className="text-text-muted">· {entry.institution}</span>
+                </h3>
+                {(entry.start_date || entry.is_current) && (
+                  <p className="font-mono text-xs text-text-faint">
+                    {entry.start_date}
+                    {entry.start_date && " – "}
+                    {entry.is_current ? "Present" : entry.end_date}
+                  </p>
+                )}
+              </div>
+              {entry.field_of_study && <p className="mt-1 text-sm text-text-faint">{entry.field_of_study}</p>}
+              {entry.description && <p className="mt-3 text-text-muted">{entry.description}</p>}
+              {entry.achievements.length > 0 && (
+                <ul className="mt-3 list-inside list-disc space-y-1 text-text-muted">
+                  {entry.achievements.map((a) => (
+                    <li key={a}>{a}</li>
+                  ))}
+                </ul>
               )}
             </div>
           ))}

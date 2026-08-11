@@ -198,3 +198,33 @@ export async function getTimelineEntryByIdAdmin(id: string) {
   if (error) throw new Error(`getTimelineEntryByIdAdmin: ${error.message}`);
   return data;
 }
+
+export type AdminEducationRow = {
+  id: string;
+  institution: string;
+  degree: string;
+  is_current: boolean;
+  content_status: string;
+  order_index: number;
+  updated_at: string;
+};
+
+export async function getAllEducationAdmin(): Promise<AdminEducationRow[]> {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase
+    .from("education")
+    .select("id, institution, degree, is_current, content_status, order_index, updated_at")
+    .order("order_index", { ascending: true });
+  if (error) throw new Error(`getAllEducationAdmin: ${error.message}`);
+  return data ?? [];
+}
+
+/** Full row for the edit form. */
+export async function getEducationByIdAdmin(id: string) {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.from("education").select("*").eq("id", id).maybeSingle();
+  if (error) throw new Error(`getEducationByIdAdmin: ${error.message}`);
+  return data;
+}
