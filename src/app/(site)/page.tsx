@@ -22,29 +22,27 @@ export default async function Home() {
       <section className="relative overflow-hidden border-b border-border">
         <div className="mx-auto max-w-5xl px-6 py-24 md:px-8 md:py-32">
           <p className="kicker mb-5 animate-fade-in">
-            {`> whoami`}
+            {site.heroKicker}
           </p>
           <h1 className="max-w-3xl animate-fade-in text-4xl font-semibold leading-[1.1] tracking-tight text-text md:text-6xl">
             Hi, I&apos;m {site.name}.
           </h1>
           <p className="mt-6 max-w-xl animate-fade-in text-lg text-text-muted [animation-delay:100ms]">
-            {site.role} with a background in engineering, translation, and data analysis.
-            I&apos;m building hands-on defensive security skills through structured learning,
-            home lab projects, and detection research.
+            {site.role} {site.heroDescription}
           </p>
 
           <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/projects" className="btn-primary">
-              View Projects <ArrowRight className="h-4 w-4" />
+            <Link href={site.heroButtons[0].url} className="btn-primary">
+              {site.heroButtons[0].label} <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/writeups" className="btn-secondary">
-              Read My Write-ups
+            <Link href={site.heroButtons[1].url} className="btn-secondary">
+              {site.heroButtons[1].label}
             </Link>
-            <Link href="/resume" className="btn-secondary">
-              <FileDown className="h-4 w-4" /> Download CV
+            <Link href={site.heroButtons[2].url} className="btn-secondary">
+              <FileDown className="h-4 w-4" /> {site.heroButtons[2].label}
             </Link>
-            <Link href="/contact" className="btn-secondary">
-              <Mail className="h-4 w-4" /> Contact Me
+            <Link href={site.heroButtons[3].url} className="btn-secondary">
+              <Mail className="h-4 w-4" /> {site.heroButtons[3].label}
             </Link>
           </div>
         </div>
@@ -60,7 +58,7 @@ export default async function Home() {
             </Link>
           </div>
           <div className="flex flex-wrap gap-2">
-            {["Security+", "TryHackMe", "Home Lab", "Python", "Windows Internals"].map((s) => (
+            {site.currentlyStudying.map((s) => (
               <span key={s} className="tag">{s}</span>
             ))}
           </div>
