@@ -228,3 +228,41 @@ export async function getEducationByIdAdmin(id: string) {
   if (error) throw new Error(`getEducationByIdAdmin: ${error.message}`);
   return data;
 }
+
+export type AdminHomeLabItemRow = {
+  id: string;
+  name: string;
+  category: string | null;
+  status: string | null;
+  content_status: string;
+  order_index: number;
+  updated_at: string;
+};
+
+export async function getAllHomeLabItemsAdmin(): Promise<AdminHomeLabItemRow[]> {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase
+    .from("home_lab_items")
+    .select("id, name, category, status, content_status, order_index, updated_at")
+    .order("order_index", { ascending: true });
+  if (error) throw new Error(`getAllHomeLabItemsAdmin: ${error.message}`);
+  return data ?? [];
+}
+
+/** Full row for the edit form. */
+export async function getHomeLabItemByIdAdmin(id: string) {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.from("home_lab_items").select("*").eq("id", id).maybeSingle();
+  if (error) throw new Error(`getHomeLabItemByIdAdmin: ${error.message}`);
+  return data;
+}
+
+export async function getHomeLabPageContentAdmin() {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.from("home_lab_page_content").select("*").eq("id", 1).maybeSingle();
+  if (error) throw new Error(`getHomeLabPageContentAdmin: ${error.message}`);
+  return data;
+}

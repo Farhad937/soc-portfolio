@@ -1,16 +1,13 @@
 import SectionHeading from "@/components/section-heading";
 import { site } from "@/lib/site";
+import { getHomeLabItems, getHomeLabPageContent } from "@/lib/content/homelab";
 
 export const metadata = { title: `Home Lab — ${site.name}` };
+export const revalidate = 3600;
 
-const vms = [
-  { name: "Domain Controller", os: "Windows Server 2022", role: "Active Directory, DNS" },
-  { name: "Windows Client", os: "Windows 11", role: "Domain-joined workstation" },
-  { name: "Kali", os: "Kali Linux", role: "Attacker / tooling box" },
-  { name: "Ubuntu", os: "Ubuntu Server", role: "General Linux practice" },
-];
+export default async function HomeLabPage() {
+  const [vms, pageContent] = await Promise.all([getHomeLabItems(), getHomeLabPageContent()]);
 
-export default function HomeLabPage() {
   return (
     <section className="section">
       <SectionHeading
@@ -21,22 +18,23 @@ export default function HomeLabPage() {
 
       <div className="mb-12 card p-6">
         <p className="log-divider mb-4">Hardware</p>
-        <p className="text-text-muted">
-          Replace with your actual laptop/desktop specs — CPU, RAM, storage. Hiring managers
-          skim this to gauge how much you had to work around resource limits, which is itself
-          a signal of resourcefulness.
-        </p>
+        <p className="text-text-muted">{pageContent.hardwareDescription}</p>
         <p className="log-divider mb-4 mt-8">Virtualization</p>
-        <p className="text-text-muted">VirtualBox, running on an isolated internal network (host-only adapter).</p>
+        <p className="text-text-muted">{pageContent.virtualizationDescription}</p>
       </div>
 
       <p className="log-divider mb-6">Virtual Machines</p>
       <div className="mb-12 grid gap-4 sm:grid-cols-2">
         {vms.map((vm) => (
-          <div key={vm.name} className="card p-5">
+          <div key={vm.id} className="card p-5">
             <h3 className="font-medium text-text">{vm.name}</h3>
-            <p className="mt-1 font-mono text-xs text-text-faint">{vm.os}</p>
-            <p className="mt-2 text-sm text-text-muted">{vm.role}</p>
+            {vm.category && <p className="mt-1 font-mono text-xs text-text-faint">{vm.category}</p>}
+            {vm.description && <p className="mt-2 text-sm text-text-muted">{vm.description}</p>}
+            {vm.link && (
+              <a href={vm.link} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-xs text-accent hover:text-accent-bright">
+                {vm.link}
+              </a>
+            )}
           </div>
         ))}
       </div>
@@ -44,18 +42,16 @@ export default function HomeLabPage() {
       <div className="card p-6">
         <p className="log-divider mb-4">Network Diagram</p>
         <div className="flex aspect-video items-center justify-center rounded-md border border-dashed border-border-strong bg-bg-raised">
-          <p className="px-4 text-center font-mono text-xs text-text-faint">
-            [ add your lab network diagram here — draw.io or Excalidraw export works well ]
-          </p>
+          <p className="px-4 text-center font-mono text-xs text-text-faint">{pageContent.networkDiagramNote}</p>
         </div>
       </div>
 
       <div className="mt-12">
         <p className="log-divider mb-4">Future Additions</p>
         <ul className="list-inside list-disc space-y-1 text-text-muted">
-          <li>Splunk instance for centralized logging</li>
-          <li>Security Onion for network-based detection</li>
-          <li>Elastic stack as a second SIEM comparison point</li>
+          {pageContent.futureAdditions.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
         </ul>
       </div>
     </section>
