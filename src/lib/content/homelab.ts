@@ -41,35 +41,32 @@ export type HomeLabPageContent = {
 };
 
 /**
- * Fallback matches the original hardcoded JSX text exactly, so if
- * Supabase is unavailable, the page still shows meaningful content
- * instead of going blank — same fallback philosophy as site.ts, not
- * the "return []" pattern used for the VM list above (that one never
- * had real content to fall back to; this one did, until this phase).
+ * No static fallback. If Supabase is unavailable or the query fails,
+ * return empty content rather than publishing stale hardcoded content.
  */
-const FALLBACK: HomeLabPageContent = {
-  hardwareDescription:
-    "Replace with your actual laptop/desktop specs — CPU, RAM, storage. Hiring managers skim this to gauge how much you had to work around resource limits, which is itself a signal of resourcefulness.",
-  virtualizationDescription: "VirtualBox, running on an isolated internal network (host-only adapter).",
-  networkDiagramNote: "[ add your lab network diagram here — draw.io or Excalidraw export works well ]",
-  futureAdditions: [
-    "Splunk instance for centralized logging",
-    "Security Onion for network-based detection",
-    "Elastic stack as a second SIEM comparison point",
-  ],
+const EMPTY_CONTENT: HomeLabPageContent = {
+  hardwareDescription: null,
+  virtualizationDescription: null,
+  networkDiagramNote: null,
+  futureAdditions: [],
 };
 
 export const getHomeLabPageContent = cache(async (): Promise<HomeLabPageContent> => {
   const supabase = getSupabaseServerClient();
-  if (!supabase) return FALLBACK;
+  if (!supabase) return EMPTY_CONTENT;
 
-  const { data, error } = await supabase.from("home_lab_page_content").select("*").eq("id", 1).maybeSingle();
+  const { data, error } = await supabase
+    .from("home_lab_page_content")
+    .select("*")
+    .eq("id", 1)
+    .maybeSingle();
 
   if (error) {
     console.warn("[getHomeLabPageContent] Supabase query failed:", error.message);
-    return FALLBACK;
+    return EMPTY_CONTENT;
   }
-  if (!data) return FALLBACK;
+
+  if (!data) return EMPTY_CONTENT;
 
   return {
     hardwareDescription: data.hardware_description,
