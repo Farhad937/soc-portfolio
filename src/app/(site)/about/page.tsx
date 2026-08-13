@@ -3,12 +3,18 @@ import { site as staticSite } from "@/lib/site";
 import { getSiteSettings } from "@/lib/content/site-settings";
 import { getExperience } from "@/lib/content/experience";
 import { getEducation } from "@/lib/content/education";
+import { getAboutPageContent } from "@/lib/content/about";
 
 export const metadata = { title: `About — ${staticSite.name}` };
 export const revalidate = 3600;
 
 export default async function AboutPage() {
-  const [site, experience, education] = await Promise.all([getSiteSettings(), getExperience(), getEducation()]);
+  const [site, experience, education, about] = await Promise.all([
+    getSiteSettings(),
+    getExperience(),
+    getEducation(),
+    getAboutPageContent(),
+  ]);
 
   return (
     <>
@@ -30,37 +36,19 @@ export default async function AboutPage() {
         </div>
 
         <div className="space-y-6 text-text-muted">
-          <p>
-            Replace this paragraph with your engineering background — what you studied, what kind
-            of problems you solved, and what that work taught you about systems thinking.
-          </p>
-          <p>
-            Replace this paragraph with your transition story: what pulled you toward defensive
-            security specifically, rather than security broadly. Being specific here (a moment, an
-            article, a lab exercise that hooked you) reads far better than a generic &quot;I&apos;ve
-            always been interested in technology.&quot;
-          </p>
-          <p>
-            Replace this paragraph with why <em>defensive</em> security interests you over offensive —
-            recruiters ask this in nearly every SOC interview, so having a real answer written down
-            helps you say it clearly out loud too.
-          </p>
+          <p>{about.engineeringBackground}</p>
+          <p>{about.securityTransition}</p>
+          <p>{about.defensiveSecurityReason}</p>
 
           <div className="log-divider">Current Focus</div>
           <ul className="list-inside list-disc space-y-1">
-            <li>CompTIA Security+ study</li>
-            <li>TryHackMe SOC Level 1 pathway</li>
-            <li>Home lab: Active Directory + Splunk detection</li>
-            <li>Python for security automation</li>
-            <li>Windows internals and event log analysis</li>
+            {about.currentFocus.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
 
           <div className="log-divider">Career Goal</div>
-          <p>
-            Replace with one or two sentences on the specific kind of SOC role and environment
-            you&apos;re targeting (e.g. MSSP vs in-house, Tier 1 entry point, industry you&apos;d
-            like to work in).
-          </p>
+          <p>{about.careerGoal}</p>
         </div>
       </div>
     </section>

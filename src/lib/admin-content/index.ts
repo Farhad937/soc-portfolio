@@ -266,3 +266,11 @@ export async function getHomeLabPageContentAdmin() {
   if (error) throw new Error(`getHomeLabPageContentAdmin: ${error.message}`);
   return data;
 }
+
+export async function getAboutPageContentAdmin() {
+  await requireAdmin();
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.from("about_page_content").select("*").eq("id", 1).maybeSingle();
+  if (error) throw new Error(`getAboutPageContentAdmin: ${error.message}`);
+  return data;
+}
