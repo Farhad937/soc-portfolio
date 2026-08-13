@@ -2,8 +2,12 @@ import {
   getAllProjectsAdmin,
   getAllWriteupsAdmin,
   getAllCertificationsAdmin,
+  getAllExperienceAdmin,
+  getAllEducationAdmin,
+  getAllTimelineAdmin,
+  getAllHomeLabItemsAdmin,
 } from "@/lib/admin-content";
-import { FolderKanban, NotebookText, BadgeCheck } from "lucide-react";
+import { FolderKanban, NotebookText, BadgeCheck, Briefcase, GraduationCap, Milestone, Server } from "lucide-react";
 
 function countByStatus(rows: { content_status: string }[]) {
   return {
@@ -15,16 +19,24 @@ function countByStatus(rows: { content_status: string }[]) {
 }
 
 export default async function AdminDashboardPage() {
-  const [projects, writeups, certifications] = await Promise.all([
+  const [projects, writeups, certifications, experience, education, journey, homeLabItems] = await Promise.all([
     getAllProjectsAdmin(),
     getAllWriteupsAdmin(),
     getAllCertificationsAdmin(),
+    getAllExperienceAdmin(),
+    getAllEducationAdmin(),
+    getAllTimelineAdmin(),
+    getAllHomeLabItemsAdmin(),
   ]);
 
   const cards = [
     { label: "Projects", icon: FolderKanban, counts: countByStatus(projects) },
     { label: "Write-ups", icon: NotebookText, counts: countByStatus(writeups) },
     { label: "Certifications", icon: BadgeCheck, counts: countByStatus(certifications) },
+    { label: "Experience", icon: Briefcase, counts: countByStatus(experience) },
+    { label: "Education", icon: GraduationCap, counts: countByStatus(education) },
+    { label: "Journey", icon: Milestone, counts: countByStatus(journey) },
+    { label: "Home Lab", icon: Server, counts: countByStatus(homeLabItems) },
   ];
 
   return (

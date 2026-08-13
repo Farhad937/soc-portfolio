@@ -2,17 +2,45 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Search as SearchIcon, ArrowUpRight, FolderKanban, NotebookText, Wrench } from "lucide-react";
+import {
+  Search as SearchIcon,
+  ArrowUpRight,
+  FolderKanban,
+  NotebookText,
+  Wrench,
+  BadgeCheck,
+  Briefcase,
+  GraduationCap,
+  Milestone,
+  Server,
+} from "lucide-react";
 import SectionHeading from "@/components/section-heading";
 
 export type SearchResult = {
-  type: "Project" | "Write-up" | "Skill";
+  type: "Project" | "Write-up" | "Skill" | "Certification" | "Experience" | "Education" | "Journey" | "Home Lab";
   title: string;
   description: string;
   href?: string;
+  /**
+   * Extra terms to match against that aren't shown in the visible
+   * description — e.g. an Experience entry's technologies, or a
+   * Certification's skills. Existing result types (Project/Write-up/
+   * Skill) never set this, so their matching behavior is unchanged:
+   * title + description + type, same as before this field existed.
+   */
+  searchText?: string;
 };
 
-const typeIcon = { Project: FolderKanban, "Write-up": NotebookText, Skill: Wrench };
+const typeIcon = {
+  Project: FolderKanban,
+  "Write-up": NotebookText,
+  Skill: Wrench,
+  Certification: BadgeCheck,
+  Experience: Briefcase,
+  Education: GraduationCap,
+  Journey: Milestone,
+  "Home Lab": Server,
+};
 
 export default function SearchClient({ allResults }: { allResults: SearchResult[] }) {
   const [query, setQuery] = useState("");
@@ -20,12 +48,10 @@ export default function SearchClient({ allResults }: { allResults: SearchResult[
   const results = useMemo(() => {
     if (!query.trim()) return [];
     const q = query.toLowerCase();
-    return allResults.filter(
-      (r) =>
-        r.title.toLowerCase().includes(q) ||
-        r.description.toLowerCase().includes(q) ||
-        r.type.toLowerCase().includes(q)
-    );
+    return allResults.filter((r) => {
+      const haystack = [r.title, r.description, r.type, r.searchText].filter(Boolean).join(" ").toLowerCase();
+      return haystack.includes(q);
+    });
   }, [query, allResults]);
 
   return (
@@ -33,7 +59,7 @@ export default function SearchClient({ allResults }: { allResults: SearchResult[
       <SectionHeading
         kicker="// Search"
         title="Search"
-        description="Searches across projects, write-ups, and skills. Try 'Splunk', 'Python', or 'Kerberos'."
+        description="Searches across projects, write-ups, skills, certifications, experience, education, journey, and home lab. Try 'Splunk', 'Python', or 'Kerberos'."
       />
 
       <div className="relative mb-10">
@@ -43,7 +69,7 @@ export default function SearchClient({ allResults }: { allResults: SearchResult[
           autoFocus
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search projects, write-ups, skills..."
+          placeholder="Search projects, write-ups, skills, certifications, experience..."
           className="w-full rounded-md border border-border-strong bg-bg-surface py-3 pl-11 pr-4 text-text placeholder:text-text-faint focus:border-accent"
         />
       </div>
