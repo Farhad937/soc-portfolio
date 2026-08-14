@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail, Terminal } from "lucide-react";
+import { Github, Linkedin, Mail, Terminal, LockKeyhole } from "lucide-react";
+import Link from "next/link";
 import type { getSiteSettings } from "@/lib/content/site-settings";
 
 type SiteSettings = Awaited<ReturnType<typeof getSiteSettings>>;
@@ -28,6 +29,9 @@ export default function Footer({ site }: { site: SiteSettings }) {
           <a href={`mailto:${site.email}`} className="text-text-muted hover:text-accent" aria-label="Email">
             <Mail className="h-5 w-5" />
           </a>
+          <Link href="/admin/login" className="text-text-faint hover:text-accent" aria-label="Admin">
+            <LockKeyhole className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </footer>
