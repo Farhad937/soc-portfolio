@@ -10,8 +10,7 @@
  * script is the ONLY place in the codebase that uses that key. It is
  * never imported by any app code, page, or component.
  */
-import { config } from "dotenv";
-config({ path: ".env.local" });
+import "dotenv/config";
 import { createClient } from "@supabase/supabase-js";
 import { site } from "../src/lib/site";
 import { projects } from "../src/lib/projects";
