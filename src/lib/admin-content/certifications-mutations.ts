@@ -18,6 +18,7 @@ function fieldsFromFormData(formData: FormData) {
     credential_url: String(formData.get("credential_url") ?? "") || null,
     description: String(formData.get("description") ?? ""),
     skills: arrayFromCsv(formData.get("skills")),
+    logo: String(formData.get("logo") ?? "") || null,
   };
 }
 

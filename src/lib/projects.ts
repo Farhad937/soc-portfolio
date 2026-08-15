@@ -17,6 +17,8 @@ export type Project = {
   lessonsLearned: string;
   futureImprovements: string;
   githubUrl?: string;
+  featuredImage?: string;
+  gallery?: string[];
 };
 
 export const projects: Project[] = [

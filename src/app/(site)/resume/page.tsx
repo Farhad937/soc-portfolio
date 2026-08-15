@@ -1,25 +1,33 @@
 import SectionHeading from "@/components/section-heading";
-import { FileDown } from "lucide-react";
-import { site } from "@/lib/site";
+import { FileDown, FileX } from "lucide-react";
+import { site as staticSite } from "@/lib/site";
+import { getSiteSettings } from "@/lib/content/site-settings";
 
-export const metadata = { title: `Resume — ${site.name}` };
+export const metadata = { title: `Resume — ${staticSite.name}` };
+export const revalidate = 3600;
 
-export default function ResumePage() {
+export default async function ResumePage() {
+  const site = await getSiteSettings();
+
   return (
     <section className="section">
       <SectionHeading kicker="// CV" title="Resume" />
 
-      <a href="/resume.pdf" download className="btn-primary mb-8 w-fit">
-        <FileDown className="h-4 w-4" /> Download PDF
-      </a>
-
-      <div className="card flex aspect-[8.5/11] max-w-2xl items-center justify-center p-6">
-        <p className="max-w-xs text-center font-mono text-xs text-text-faint">
-          [ Drop your resume PDF at <code className="text-accent">public/resume.pdf</code> and
-          it will download from the button above and can be embedded here with an
-          &lt;iframe src=&quot;/resume.pdf&quot; /&gt; ]
-        </p>
-      </div>
+      {site.resumeUrl ? (
+        <>
+          <a href={site.resumeUrl} download target="_blank" rel="noopener noreferrer" className="btn-primary mb-8 w-fit">
+            <FileDown className="h-4 w-4" /> Download PDF
+          </a>
+          <div className="card max-w-2xl overflow-hidden">
+            <iframe src={site.resumeUrl} className="aspect-[8.5/11] w-full" title="Resume preview" />
+          </div>
+        </>
+      ) : (
+        <div className="card flex max-w-2xl flex-col items-center gap-3 p-10 text-center">
+          <FileX className="h-8 w-8 text-text-faint" />
+          <p className="text-text-muted">No resume has been uploaded yet.</p>
+        </div>
+      )}
     </section>
   );
 }

@@ -4,6 +4,8 @@ import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
 import { AlertCircle } from "lucide-react";
 import type { ProjectFormState } from "@/lib/admin-content/projects-mutations";
+import ImageUploadField from "@/components/admin/image-upload-field";
+import GalleryUploadField from "@/components/admin/gallery-upload-field";
 
 type ProjectRow = Record<string, any> | null;
 
@@ -79,6 +81,18 @@ export default function ProjectForm({
           <input type="checkbox" name="featured" defaultChecked={!!field("featured")} className="rounded border-border-strong" />
           Featured
         </label>
+        <ImageUploadField
+          name="featured_image"
+          folder="projects"
+          initialUrl={field("featured_image")}
+          label="Featured Image"
+        />
+        <GalleryUploadField
+          name="gallery"
+          folder="projects"
+          initialUrls={Array.isArray(initial?.gallery) ? initial.gallery : []}
+          label="Gallery"
+        />
       </section>
 
       <section className="space-y-4">

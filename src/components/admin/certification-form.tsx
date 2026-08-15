@@ -4,6 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
 import { AlertCircle } from "lucide-react";
 import type { CertificationFormState } from "@/lib/admin-content/certifications-mutations";
+import ImageUploadField from "@/components/admin/image-upload-field";
 
 type CertRow = Record<string, any> | null;
 
@@ -42,6 +43,7 @@ export default function CertificationForm({
       </div>
       <TextArea label="Description" name="description" defaultValue={field("description")} rows={3} />
       <Field label="Skills Learned" name="skills" defaultValue={arrayField("skills")} placeholder="Comma-separated" />
+      <ImageUploadField name="logo" folder="certifications" initialUrl={field("logo")} label="Logo" />
 
       <div className="flex items-center gap-3 border-t border-border pt-6">
         <SubmitButtons mode={mode} />

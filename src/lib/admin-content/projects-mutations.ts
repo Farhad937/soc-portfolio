@@ -16,6 +16,14 @@ function arrayFromCsv(value: FormDataEntryValue | null): string[] {
     .filter(Boolean);
 }
 
+function arrayFromLines(value: FormDataEntryValue | null): string[] {
+  if (!value || typeof value !== "string") return [];
+  return value
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
 function fieldsFromFormData(formData: FormData) {
   return {
     title: String(formData.get("title") ?? "").trim(),
@@ -38,6 +46,8 @@ function fieldsFromFormData(formData: FormData) {
     github_url: String(formData.get("github_url") ?? "") || null,
     live_url: String(formData.get("live_url") ?? "") || null,
     featured: formData.get("featured") === "on",
+    featured_image: String(formData.get("featured_image") ?? "") || null,
+    gallery: arrayFromLines(formData.get("gallery")),
   };
 }
 

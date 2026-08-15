@@ -27,6 +27,7 @@ export type Certification = {
   date: string;
   skills: string[];
   credentialUrl?: string;
+  logo?: string;
   status: "Completed" | "In Progress" | "Planned";
 };
 

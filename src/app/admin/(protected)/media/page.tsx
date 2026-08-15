@@ -1,11 +1,19 @@
-import NotYetBacked from "@/components/admin/not-yet-backed";
+import { listMediaFiles } from "@/lib/supabase/storage";
+import MediaLibrary from "@/components/admin/media-library";
 
-export default function AdminMediaPage() {
+export default async function AdminMediaPage() {
+  const files = await listMediaFiles("uploads");
+
   return (
-    <NotYetBacked
-      title="Media Library"
-      reason="No Supabase Storage bucket has been created, and no upload/list/delete code exists. This needs its own setup step before anything can appear here."
-      phase="Phase 18"
-    />
+    <div className="p-8">
+      <h1 className="mb-1 text-xl font-semibold text-text">Media Library</h1>
+      <p className="mb-6 text-sm text-text-muted">
+        Upload images here to get a public URL, then paste it into a Project gallery, a
+        Certification logo, or anywhere else that accepts an image URL. Project/Certification
+        forms also support uploading directly, which doesn't require this page.
+      </p>
+
+      <MediaLibrary initialFiles={files} />
+    </div>
   );
 }

@@ -1,11 +1,21 @@
-import NotYetBacked from "@/components/admin/not-yet-backed";
+import { getSiteSettingsAdmin } from "@/lib/admin-content";
+import ResumeManager from "@/components/admin/resume-manager";
 
-export default function AdminResumePage() {
+export default async function AdminResumePage() {
+  const settings = await getSiteSettingsAdmin();
+
   return (
-    <NotYetBacked
-      title="Resume"
-      reason="The public /resume page currently links to a static placeholder file at public/resume.pdf. No Supabase Storage bucket or upload mechanism exists yet, so there's nothing here to manage from the admin side."
-      phase="Phase 17"
-    />
+    <div className="p-8">
+      <h1 className="mb-1 text-xl font-semibold text-text">Resume</h1>
+      <p className="mb-6 text-sm text-text-muted">
+        Manage the PDF served on the public /resume page.
+      </p>
+
+      <ResumeManager
+        currentUrl={settings?.resume_url ?? null}
+        currentFilename={settings?.resume_filename ?? null}
+        currentUploadedAt={settings?.resume_uploaded_at ?? null}
+      />
+    </div>
   );
 }

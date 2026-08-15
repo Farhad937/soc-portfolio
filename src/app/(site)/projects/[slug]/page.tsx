@@ -48,9 +48,25 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
       <h1 className="text-3xl font-semibold tracking-tight text-text md:text-4xl">{project.title}</h1>
       <p className="mt-4 text-lg text-text-muted">{project.summary}</p>
 
+      {project.featuredImage && (
+        <img
+          src={project.featuredImage}
+          alt={project.title}
+          className="mt-8 w-full rounded-lg border border-border object-cover"
+        />
+      )}
+
       <div className="mt-6 flex flex-wrap gap-1.5">
         {project.tech.map((t) => <span key={t} className="tag">{t}</span>)}
       </div>
+
+      {project.gallery && project.gallery.length > 0 && (
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {project.gallery.map((url) => (
+            <img key={url} src={url} alt="" className="aspect-video w-full rounded-md border border-border object-cover" />
+          ))}
+        </div>
+      )}
 
       {project.githubUrl && (
         <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary mt-6 w-fit">

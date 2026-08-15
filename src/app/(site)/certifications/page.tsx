@@ -28,8 +28,15 @@ export default async function CertificationsPage() {
                 <Icon className="h-3.5 w-3.5" />
                 {cert.status}
               </div>
-              <h3 className="text-lg font-semibold text-text">{cert.name}</h3>
-              <p className="mt-1 text-sm text-text-muted">{cert.issuer} {cert.date && `· ${cert.date}`}</p>
+              <div className="flex items-start gap-3">
+                {cert.logo && (
+                  <img src={cert.logo} alt="" className="h-10 w-10 shrink-0 rounded-md border border-border object-contain bg-white p-1" />
+                )}
+                <div>
+                  <h3 className="text-lg font-semibold text-text">{cert.name}</h3>
+                  <p className="mt-1 text-sm text-text-muted">{cert.issuer} {cert.date && `· ${cert.date}`}</p>
+                </div>
+              </div>
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {cert.skills.map((s) => (
                   <span key={s} className="tag">{s}</span>

@@ -28,6 +28,8 @@ function mapRow(row: Record<string, any>): Project {
     lessonsLearned: row.lessons_learned ?? "",
     futureImprovements: row.future_improvements ?? "",
     githubUrl: row.github_url ?? undefined,
+    featuredImage: row.featured_image ?? undefined,
+    gallery: row.gallery ?? [],
   };
 }
 

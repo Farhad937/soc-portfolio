@@ -19,9 +19,28 @@ const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
  *
  * Returns null if env vars aren't set so data-access functions can fall
  * back to static data.
+ *
+ * Diagnostic logging: every public content loader's `if (!supabase)`
+ * branch is silent by design (falling back is the intended behavior,
+ * not an error worth warning about on every request). But if this
+ * function returns null in a live environment where it shouldn't — e.g.
+ * NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY missing/misconfigured at build
+ * time on the hosting platform — that silently degrades every public
+ * page to static/fallback content with zero visibility into why.
+ * Logging once here, centrally, makes that state observable in
+ * production server logs without touching every loader that calls this.
  */
 export function getSupabaseServerClient() {
-  if (!supabaseUrl || !supabasePublishableKey) return null;
+  if (!supabaseUrl || !supabasePublishableKey) {
+    console.error(
+      "[getSupabaseServerClient] Missing Supabase env var(s) — falling back to static/empty content for ALL public reads:",
+      {
+        NEXT_PUBLIC_SUPABASE_URL: supabaseUrl ? "set" : "MISSING",
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: supabasePublishableKey ? "set" : "MISSING",
+      }
+    );
+    return null;
+  }
   return createClient(supabaseUrl, supabasePublishableKey, {
     auth: { persistSession: false },
   });

@@ -9,6 +9,7 @@ function mapRow(row: Record<string, any>): Certification {
     date: row.date ?? "",
     skills: row.skills ?? [],
     credentialUrl: row.credential_url ?? undefined,
+    logo: row.logo ?? undefined,
     status: row.status,
   };
 }

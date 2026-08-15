@@ -35,6 +35,8 @@ export const getSiteSettings = cache(async function getSiteSettings() {
       { label: "Contact Me", url: "/contact" },
     ],
     currentlyStudying: ["Security+", "TryHackMe", "Home Lab", "Python", "Windows Internals"],
+    resumeUrl: null as string | null,
+    resumeFilename: null as string | null,
   };
 
   if (!supabase) return fallback;
@@ -70,5 +72,7 @@ export const getSiteSettings = cache(async function getSiteSettings() {
       { label: row.hero_button_4_label ?? fallback.heroButtons[3].label, url: row.hero_button_4_url ?? fallback.heroButtons[3].url },
     ],
     currentlyStudying: (row.currently_studying ?? fallback.currentlyStudying) as string[],
+    resumeUrl: row.resume_url ?? null,
+    resumeFilename: row.resume_filename ?? null,
   };
 });
