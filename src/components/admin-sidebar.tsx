@@ -46,7 +46,7 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-56 shrink-0 border-r border-border p-3">
+    <nav className="w-16 shrink-0 border-r border-border p-2 sm:w-56 sm:p-3">
       <ul className="space-y-0.5">
         {sections.map(({ href, label, icon: Icon, exact }) => {
           const active = exact ? pathname === href : pathname.startsWith(href);
@@ -54,12 +54,13 @@ export default function AdminSidebar() {
             <li key={href}>
               <Link
                 href={href}
-                className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors ${
+                title={label}
+                className={`flex items-center justify-center gap-2.5 rounded-md px-2 py-2 text-sm transition-colors sm:justify-start sm:px-3 ${
                   active ? "bg-bg-raised text-accent" : "text-text-muted hover:bg-bg-raised hover:text-text"
                 }`}
               >
                 <Icon className="h-4 w-4 shrink-0" />
-                {label}
+                <span className="hidden sm:inline">{label}</span>
               </Link>
             </li>
           );
