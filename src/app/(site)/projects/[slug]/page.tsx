@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Github } from "lucide-react";
 import { getProjects, getProjectBySlug } from "@/lib/content/projects";
 import type { Project } from "@/lib/projects";
+import RichText from "@/components/rich-text";
 
 export const revalidate = 3600;
 
@@ -16,14 +17,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return { title: project ? `${project.title} — Project` : "Project not found" };
 }
 
-const sections: { key: keyof Project; label: string }[] = [
-  { key: "overview", label: "Overview" },
+// `rich: true` fields render through the Markdown renderer; existing
+// plain content with no Markdown syntax renders identically to before
+// (a paragraph is a paragraph either way) — no data conversion needed.
+const sections: { key: keyof Project; label: string; rich?: boolean }[] = [
+  { key: "overview", label: "Overview", rich: true },
   { key: "objective", label: "Objective" },
   { key: "environment", label: "Environment" },
   { key: "challenges", label: "Challenges" },
-  { key: "investigation", label: "Investigation" },
-  { key: "findings", label: "Findings" },
-  { key: "lessonsLearned", label: "Lessons Learned" },
+  { key: "investigation", label: "Investigation", rich: true },
+  { key: "findings", label: "Findings", rich: true },
+  { key: "lessonsLearned", label: "Lessons Learned", rich: true },
   { key: "futureImprovements", label: "Future Improvements" },
 ];
 
@@ -75,7 +79,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
       )}
 
       <div className="mt-14 space-y-12">
-        {sections.map(({ key, label }) => {
+        {sections.map(({ key, label, rich }) => {
           const value = project[key];
           if (!value) return null;
           return (
@@ -85,6 +89,8 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
                 <ul className="list-inside list-disc space-y-1 text-text-muted">
                   {(value as string[]).map((v) => <li key={v}>{v}</li>)}
                 </ul>
+              ) : rich ? (
+                <RichText content={value as string} />
               ) : (
                 <p className="leading-relaxed text-text-muted">{value as string}</p>
               )}

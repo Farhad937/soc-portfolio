@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock } from "lucide-react";
 import { getWriteups, getWriteupBySlug } from "@/lib/content/writeups";
+import RichText from "@/components/rich-text";
 
 export const revalidate = 3600;
 
@@ -38,7 +39,7 @@ export default async function WriteupDetailPage({ params }: { params: { slug: st
       <div className="mt-14 space-y-12">
         <div>
           <p className="log-divider mb-4">Concept</p>
-          <p className="leading-relaxed text-text-muted">{writeup.concept}</p>
+          <RichText content={writeup.concept} />
         </div>
 
         <div>

@@ -6,6 +6,7 @@ import { AlertCircle } from "lucide-react";
 import type { ProjectFormState } from "@/lib/admin-content/projects-mutations";
 import ImageUploadField from "@/components/admin/image-upload-field";
 import GalleryUploadField from "@/components/admin/gallery-upload-field";
+import RichTextEditor from "@/components/admin/rich-text-editor";
 
 type ProjectRow = Record<string, any> | null;
 
@@ -97,7 +98,7 @@ export default function ProjectForm({
 
       <section className="space-y-4">
         <p className="log-divider">Project Page Sections</p>
-        <TextArea label="Overview" name="overview" defaultValue={field("overview")} rows={3} />
+        <RichTextEditor label="Overview" name="overview" defaultValue={field("overview")} rows={4} />
         <TextArea label="Objective" name="objective" defaultValue={field("objective")} rows={2} />
         <TextArea label="Environment" name="environment" defaultValue={field("environment")} rows={2} />
         <Field
@@ -107,9 +108,9 @@ export default function ProjectForm({
           placeholder="Comma-separated"
         />
         <TextArea label="Challenges" name="challenges" defaultValue={field("challenges")} rows={3} />
-        <TextArea label="Investigation" name="investigation" defaultValue={field("investigation")} rows={3} />
-        <TextArea label="Findings" name="findings" defaultValue={field("findings")} rows={3} />
-        <TextArea label="Lessons Learned" name="lessons_learned" defaultValue={field("lessons_learned")} rows={3} />
+        <RichTextEditor label="Investigation" name="investigation" defaultValue={field("investigation")} rows={4} />
+        <RichTextEditor label="Findings" name="findings" defaultValue={field("findings")} rows={4} />
+        <RichTextEditor label="Lessons Learned" name="lessons_learned" defaultValue={field("lessons_learned")} rows={4} />
         <TextArea label="Future Improvements" name="future_improvements" defaultValue={field("future_improvements")} rows={2} />
       </section>
 

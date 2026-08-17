@@ -4,6 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
 import { AlertCircle } from "lucide-react";
 import type { WriteupFormState } from "@/lib/admin-content/writeups-mutations";
+import RichTextEditor from "@/components/admin/rich-text-editor";
 
 type WriteupRow = Record<string, any> | null;
 
@@ -78,7 +79,7 @@ export default function WriteupForm({
 
       <section className="space-y-4">
         <p className="log-divider">Content</p>
-        <TextArea label="Concept (main body)" name="concept" defaultValue={field("concept")} rows={8} />
+        <RichTextEditor label="Concept (main body)" name="concept" defaultValue={field("concept")} rows={10} />
         <TextArea
           label="Key Takeaways"
           name="key_takeaways"
