@@ -48,7 +48,7 @@ export default async function DashboardPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {stats.map(({ label, value, icon: Icon }) => (
-          <div key={label} className="card p-6">
+          <div key={label} className="card animate-fade-in p-6">
             <div className="mb-4 flex items-center justify-between">
               <Icon className="h-5 w-5 text-accent" />
               <span className="font-mono text-[11px] uppercase tracking-wide text-text-faint">
@@ -64,7 +64,7 @@ export default async function DashboardPage() {
         <p className="log-divider mb-4">By TryHackMe Path</p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {thmPaths.map((path) => (
-            <div key={path.name} className="card p-4">
+            <div key={path.name} className="card animate-fade-in p-4">
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm font-medium text-text">{path.name}</span>
                 <span className="font-mono text-xs text-text-muted">{path.progress}%</span>

@@ -24,7 +24,7 @@ export default async function TryHackMePage() {
       />
       <div className="space-y-8">
         {thmPaths.map((path) => (
-          <div key={path.name} className="card p-6">
+          <div key={path.name} className="card animate-fade-in p-6">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-semibold text-text">{path.name}</h3>
               <span className="font-mono text-xs text-text-muted">{path.progress}%</span>

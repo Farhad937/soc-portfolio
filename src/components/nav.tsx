@@ -33,8 +33,8 @@ export default function Nav({ site }: { site: SiteSettings }) {
       </div>
 
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
-        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <ShieldHalf className="h-5 w-5 text-accent" strokeWidth={2} />
+        <Link href="/" className="group flex items-center gap-2 font-semibold tracking-tight">
+          <ShieldHalf className="h-5 w-5 text-accent transition-transform duration-200 group-hover:-rotate-3 group-focus-visible:-rotate-3" strokeWidth={2} />
           <span>{site.name}</span>
         </Link>
 
@@ -45,7 +45,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-md px-3 py-2 text-sm transition-colors ${
+                className={`rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
                   active ? "text-accent" : "text-text-muted hover:text-text"
                 }`}
               >
@@ -59,7 +59,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
           <Link
             href="/search"
             aria-label="Search"
-            className={`hidden rounded-md p-2 lg:flex ${
+            className={`hidden rounded-md p-2 transition-transform hover:-translate-y-px lg:flex ${
               pathname === "/search" ? "text-accent" : "text-text-muted hover:text-text"
             }`}
           >
@@ -67,7 +67,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
           </Link>
 
           <button
-            className="lg:hidden"
+            className="transition-transform hover:scale-105 lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen(!open)}
           >
@@ -77,7 +77,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
       </div>
 
       {open && (
-        <nav className="border-t border-border bg-bg px-6 py-4 lg:hidden">
+        <nav className="animate-fade-in border-t border-border bg-bg px-6 py-4 lg:hidden">
           <div className="flex flex-col gap-1">
             <Link
               href="/search"

@@ -86,7 +86,7 @@ export default function SearchClient({ allResults }: { allResults: SearchResult[
         {results.map((r, i) => {
           const Icon = typeIcon[r.type];
           const content = (
-            <div className="card flex items-start gap-4 p-4">
+            <div className={`card flex animate-fade-in items-start gap-4 p-4 ${r.href ? "interactive-card" : ""}`}>
               <Icon className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <div className="min-w-0">
                 <div className="flex items-center gap-2">

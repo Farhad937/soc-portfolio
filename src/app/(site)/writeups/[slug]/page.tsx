@@ -22,8 +22,8 @@ export default async function WriteupDetailPage({ params }: { params: { slug: st
 
   return (
     <article className="section max-w-3xl">
-      <Link href="/writeups" className="mb-8 inline-flex items-center gap-1.5 font-mono text-xs text-text-muted hover:text-accent">
-        <ArrowLeft className="h-3.5 w-3.5" /> All write-ups
+      <Link href="/writeups" className="group mb-8 inline-flex items-center gap-1.5 font-mono text-xs text-text-muted transition-colors hover:text-accent focus-visible:text-accent">
+        <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-0.5 group-focus-visible:-translate-x-0.5" /> All write-ups
       </Link>
 
       <div className="mb-3 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-text-faint">

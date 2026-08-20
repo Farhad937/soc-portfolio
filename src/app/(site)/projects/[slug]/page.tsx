@@ -37,8 +37,8 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
 
   return (
     <article className="section max-w-3xl">
-      <Link href="/projects" className="mb-8 inline-flex items-center gap-1.5 font-mono text-xs text-text-muted hover:text-accent">
-        <ArrowLeft className="h-3.5 w-3.5" /> All projects
+      <Link href="/projects" className="group mb-8 inline-flex items-center gap-1.5 font-mono text-xs text-text-muted transition-colors hover:text-accent focus-visible:text-accent">
+        <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-0.5 group-focus-visible:-translate-x-0.5" /> All projects
       </Link>
 
       <div className="mb-3 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-text-faint">
@@ -56,7 +56,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
         <img
           src={project.featuredImage}
           alt={project.title}
-          className="mt-8 w-full rounded-lg border border-border object-cover"
+          className="mt-8 w-full animate-fade-in rounded-lg border border-border object-cover [animation-delay:100ms]"
         />
       )}
 
@@ -67,7 +67,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
       {project.gallery && project.gallery.length > 0 && (
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {project.gallery.map((url) => (
-            <img key={url} src={url} alt="" className="aspect-video w-full rounded-md border border-border object-cover" />
+            <img key={url} src={url} alt="" className="aspect-video w-full animate-fade-in rounded-md border border-border object-cover" />
           ))}
         </div>
       )}

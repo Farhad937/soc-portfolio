@@ -12,7 +12,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="card group flex h-full flex-col justify-between p-6"
+      className="card interactive-card group flex h-full animate-fade-in flex-col justify-between p-6"
     >
       <div>
         <div className="mb-3 flex items-center justify-between">
@@ -23,9 +23,9 @@ export default function ProjectCard({ project }: { project: Project }) {
             {project.status}
           </span>
         </div>
-        <h3 className="flex items-center gap-1.5 text-lg font-semibold text-text group-hover:text-accent">
+        <h3 className="flex items-center gap-1.5 text-lg font-semibold text-text group-hover:text-accent group-focus-visible:text-accent">
           {project.title}
-          <ArrowUpRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
+          <ArrowUpRight className="h-4 w-4 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 group-focus-visible:translate-x-0.5 group-focus-visible:-translate-y-0.5 group-focus-visible:opacity-100" />
         </h3>
         <p className="mt-2 text-sm text-text-muted">{project.summary}</p>
       </div>

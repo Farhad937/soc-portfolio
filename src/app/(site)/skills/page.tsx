@@ -17,7 +17,7 @@ export default async function SkillsPage() {
       />
       <div className="grid gap-5 sm:grid-cols-2">
         {skillGroups.map((group) => (
-          <div key={group.category} className="card p-6">
+          <div key={group.category} className="card animate-fade-in p-6">
             <h3 className="mb-4 font-mono text-xs uppercase tracking-wide text-accent">
               {group.category}
             </h3>

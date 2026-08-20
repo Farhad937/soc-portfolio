@@ -31,7 +31,7 @@ export default async function Home() {
             {site.role} {site.heroDescription}
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10 flex flex-wrap gap-3 animate-fade-in [animation-delay:200ms]">
             <Link href={site.heroButtons[0].url} className="btn-primary">
               {site.heroButtons[0].label} <ArrowRight className="h-4 w-4" />
             </Link>
@@ -57,7 +57,7 @@ export default async function Home() {
               View Dashboard →
             </Link>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 animate-fade-in [animation-delay:100ms]">
             {site.currentlyStudying.map((s) => (
               <span key={s} className="tag">{s}</span>
             ))}

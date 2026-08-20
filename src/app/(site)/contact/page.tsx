@@ -24,7 +24,7 @@ export default async function ContactPage() {
         description="Open to Junior SOC Analyst roles and conversations about defensive security."
       />
 
-      <div className="card p-6">
+      <div className="card animate-fade-in p-6">
         <div className="mb-6 flex items-center gap-2 text-text-muted">
           <MapPin className="h-4 w-4" />
           <span>{site.location}</span>
@@ -36,9 +36,9 @@ export default async function ContactPage() {
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-md px-3 py-3 text-text-muted transition-colors hover:bg-bg-raised hover:text-accent"
+              className="group flex items-center gap-3 rounded-md px-3 py-3 text-text-muted transition-all hover:translate-x-0.5 hover:bg-bg-raised hover:text-accent focus-visible:translate-x-0.5 focus-visible:bg-bg-raised focus-visible:text-accent"
             >
-              <Icon className="h-4 w-4" />
+              <Icon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5" />
               {label}
             </a>
           ))}

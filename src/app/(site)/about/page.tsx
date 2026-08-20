@@ -22,8 +22,8 @@ export default async function AboutPage() {
       <SectionHeading kicker="// About" title="About Me" />
 
       <div className="grid gap-12 md:grid-cols-[1fr_1.4fr]">
-        <div className="card h-fit p-6">
-          <div className="aspect-square w-full overflow-hidden rounded-2xl border border-dashed border-border-strong bg-bg-raised flex items-center justify-center">
+        <div className="card h-fit animate-fade-in p-6">
+          <div className="flex aspect-square w-full animate-fade-in items-center justify-center overflow-hidden rounded-2xl border border-dashed border-border-strong bg-bg-raised [animation-delay:100ms]">
             {about.profileImage ? (
               <img src={about.profileImage} alt="Professional profile" className="h-full rounded-2xl object-contain" />
             ) : (
@@ -60,7 +60,7 @@ export default async function AboutPage() {
         <SectionHeading kicker="// Career" title="Experience" />
         <div className="space-y-6">
           {experience.map((entry) => (
-            <div key={entry.id} className="card p-6">
+            <div key={entry.id} className="card animate-fade-in p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-lg font-semibold text-text">
                   {entry.position} <span className="text-text-muted">· {entry.company}</span>
@@ -100,7 +100,7 @@ export default async function AboutPage() {
         <SectionHeading kicker="// Academics" title="Education" />
         <div className="space-y-6">
           {education.map((entry) => (
-            <div key={entry.id} className="card p-6">
+            <div key={entry.id} className="card animate-fade-in p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-lg font-semibold text-text">
                   {entry.degree} <span className="text-text-muted">· {entry.institution}</span>
