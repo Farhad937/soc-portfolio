@@ -25,7 +25,7 @@ export default async function AboutPage() {
         <div className="card h-fit p-6">
           <div className="aspect-square w-full overflow-hidden rounded-2xl border border-dashed border-border-strong bg-bg-raised flex items-center justify-center">
             {about.profileImage ? (
-              <img src={about.profileImage} alt="Professional profile" className="h-full w-full rounded-2xl object-contain" />
+              <img src={about.profileImage} alt="Professional profile" className="h-full rounded-2xl object-contain" />
             ) : (
               <p className="px-4 text-center font-mono text-xs text-text-faint">[ professional photo ]</p>
             )}
