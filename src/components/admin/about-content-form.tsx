@@ -3,6 +3,7 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import type { AboutContentFormState } from "@/lib/admin-content/about-mutations";
+import ImageUploadField from "@/components/admin/image-upload-field";
 
 export default function AboutContentForm({
   action,
@@ -30,6 +31,13 @@ export default function AboutContentForm({
           Saved. The public /about page has been updated.
         </div>
       )}
+
+      <ImageUploadField
+        name="profile_image"
+        folder="uploads"
+        initialUrl={field("profile_image")}
+        label="Profile Image"
+      />
 
       <TextArea
         label="Engineering Background"

@@ -2,6 +2,7 @@ import { cache } from "react";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export type AboutPageContent = {
+  profileImage: string | null;
   engineeringBackground: string | null;
   securityTransition: string | null;
   defensiveSecurityReason: string | null;
@@ -15,6 +16,7 @@ export type AboutPageContent = {
  * public content, so a temporary Supabase failure must not blank it.
  */
 const FALLBACK: AboutPageContent = {
+  profileImage: null,
   engineeringBackground:
     "Replace this paragraph with your engineering background — what you studied, what kind of problems you solved, and what that work taught you about systems thinking.",
   securityTransition:
@@ -45,6 +47,7 @@ export const getAboutPageContent = cache(async (): Promise<AboutPageContent> => 
   if (!data) return FALLBACK;
 
   return {
+    profileImage: data.profile_image,
     engineeringBackground: data.engineering_background,
     securityTransition: data.security_transition,
     defensiveSecurityReason: data.defensive_security_reason,

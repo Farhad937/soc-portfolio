@@ -17,6 +17,7 @@ export async function updateAboutContent(
   const { error } = await supabase
     .from("about_page_content")
     .update({
+      profile_image: String(formData.get("profile_image") ?? "") || null,
       engineering_background: String(formData.get("engineering_background") ?? "") || null,
       security_transition: String(formData.get("security_transition") ?? "") || null,
       defensive_security_reason: String(formData.get("defensive_security_reason") ?? "") || null,

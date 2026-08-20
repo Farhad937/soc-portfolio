@@ -24,9 +24,11 @@ export default async function AboutPage() {
       <div className="grid gap-12 md:grid-cols-[1fr_1.4fr]">
         <div className="card h-fit p-6">
           <div className="aspect-square w-full rounded-md border border-dashed border-border-strong bg-bg-raised flex items-center justify-center">
-            <p className="px-4 text-center font-mono text-xs text-text-faint">
-              [ professional photo ]
-            </p>
+            {about.profileImage ? (
+              <img src={about.profileImage} alt="Professional profile" className="h-full w-full rounded-md object-cover" />
+            ) : (
+              <p className="px-4 text-center font-mono text-xs text-text-faint">[ professional photo ]</p>
+            )}
           </div>
           <dl className="mt-6 space-y-2 font-mono text-xs text-text-muted">
             <div className="flex justify-between"><dt>role</dt><dd className="text-text">{site.role}</dd></div>
