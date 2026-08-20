@@ -2,7 +2,8 @@
 
 import { useRef, useState, useTransition } from "react";
 import { Upload, X, Loader2 } from "lucide-react";
-import { uploadMedia } from "@/lib/admin-content/media-mutations";
+import { beginMediaUpload, completeMediaUpload } from "@/lib/admin-content/media-mutations";
+import { uploadSignedMediaFile } from "@/lib/supabase/signed-media-upload-client";
 
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
 
@@ -39,23 +40,21 @@ export default function ImageUploadField({
       return;
     }
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("folder", folder);
-    formData.append("kind", "image");
-
     startTransition(async () => {
       try {
-        const result = await uploadMedia({ error: null }, formData);
-        if (result?.error) {
-          setError(result.error);
-        } else if (result?.publicUrl) {
-          setUrl(result.publicUrl);
-        } else {
-          setError("Upload failed. Please try again.");
-        }
-      } catch {
-        setError("Upload failed. Please try again.");
+        const authorization = await beginMediaUpload({
+          fileName: file.name,
+          fileSize: file.size,
+          fileType: file.type,
+          folder,
+        });
+        if (authorization.error || !authorization.upload) throw new Error(authorization.error ?? "Could not authorize upload.");
+        await uploadSignedMediaFile(file, authorization.upload);
+        const result = await completeMediaUpload(authorization.upload.path);
+        if (result.error || !result.publicUrl) throw new Error(result.error ?? "Upload failed.");
+        setUrl(result.publicUrl);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Upload failed. Please try again.");
       }
       if (fileInputRef.current) fileInputRef.current.value = "";
     });

@@ -1,9 +1,12 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useRouter } from "next/navigation";
 import { AlertCircle, CheckCircle2, FileText, Trash2, Upload } from "lucide-react";
-import { uploadResume, removeResume, type ResumeFormState } from "@/lib/admin-content/resume-mutations";
+import { beginResumeUpload, completeResumeUpload, removeResume, type ResumeFormState } from "@/lib/admin-content/resume-mutations";
+import { uploadSignedMediaFile } from "@/lib/supabase/signed-media-upload-client";
+
+const MAX_PDF_BYTES = 10 * 1024 * 1024;
 
 export default function ResumeManager({
   currentUrl,
@@ -14,13 +17,50 @@ export default function ResumeManager({
   currentFilename: string | null;
   currentUploadedAt: string | null;
 }) {
-  const [state, formAction] = useFormState<ResumeFormState, FormData>(uploadResume, { error: null });
-  const [isRemoving, startRemoveTransition] = useTransition();
+  const router = useRouter();
+  const [state, setState] = useState<ResumeFormState>({ error: null });
+  const [isPending, startTransition] = useTransition();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function handleRemove() {
     if (!confirm("Remove the current resume? The public /resume page will show an empty state until a new one is uploaded.")) return;
-    startRemoveTransition(() => removeResume());
+    startTransition(async () => {
+      await removeResume();
+      router.refresh();
+    });
+  }
+
+  function handleUpload(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const file = fileInputRef.current?.files?.[0];
+    if (!file) {
+      setState({ error: "Choose a PDF file first." });
+      return;
+    }
+    if (file.type !== "application/pdf") {
+      setState({ error: "Unsupported file type. Only PDF is allowed here." });
+      return;
+    }
+    if (file.size > MAX_PDF_BYTES) {
+      setState({ error: "File too large (max 10MB)." });
+      return;
+    }
+
+    setState({ error: null });
+    startTransition(async () => {
+      try {
+        const authorization = await beginResumeUpload({ fileName: file.name, fileSize: file.size, fileType: file.type });
+        if (authorization.error || !authorization.upload) throw new Error(authorization.error ?? "Could not authorize upload.");
+        await uploadSignedMediaFile(file, authorization.upload);
+        const result = await completeResumeUpload(authorization.upload.path, file.name);
+        if (result.error) throw new Error(result.error);
+        setState(result);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        router.refresh();
+      } catch (err) {
+        setState({ error: err instanceof Error ? err.message : "Upload failed. Please try again." });
+      }
+    });
   }
 
   return (
@@ -48,20 +88,10 @@ export default function ResumeManager({
                 <a href={currentUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-text hover:text-accent">
                   {currentFilename ?? "resume.pdf"}
                 </a>
-                {currentUploadedAt && (
-                  <p className="font-mono text-xs text-text-faint">
-                    Uploaded {new Date(currentUploadedAt).toLocaleDateString()}
-                  </p>
-                )}
+                {currentUploadedAt && <p className="font-mono text-xs text-text-faint">Uploaded {new Date(currentUploadedAt).toLocaleDateString()}</p>}
               </div>
             </div>
-            <button
-              type="button"
-              onClick={handleRemove}
-              disabled={isRemoving}
-              className="rounded p-2 text-text-faint hover:bg-danger/10 hover:text-danger disabled:opacity-40"
-              title="Remove resume"
-            >
+            <button type="button" onClick={handleRemove} disabled={isPending} className="rounded p-2 text-text-faint hover:bg-danger/10 hover:text-danger disabled:opacity-40" title="Remove">
               <Trash2 className="h-4 w-4" />
             </button>
           </div>
@@ -70,29 +100,13 @@ export default function ResumeManager({
         )}
       </div>
 
-      <form action={formAction} className="card p-5">
-        <p className="mb-3 font-mono text-xs uppercase tracking-wide text-text-faint">
-          {currentUrl ? "Replace Resume" : "Upload Resume"}
-        </p>
-        <input
-          ref={fileInputRef}
-          type="file"
-          name="file"
-          accept="application/pdf"
-          required
-          className="mb-4 w-full text-sm text-text file:mr-3 file:rounded-md file:border file:border-border-strong file:bg-bg-surface file:px-3 file:py-1.5 file:text-sm file:text-text"
-        />
-        <SubmitButton />
+      <form onSubmit={handleUpload} className="card p-5">
+        <p className="mb-3 font-mono text-xs uppercase tracking-wide text-text-faint">{currentUrl ? "Replace Resume" : "Upload Resume"}</p>
+        <input ref={fileInputRef} type="file" accept="application/pdf" required className="mb-4 w-full text-sm text-text file:mr-3 file:rounded-md file:border file:border-border-strong file:bg-bg-surface file:px-3 file:py-1.5 file:text-sm file:text-text" />
+        <button type="submit" disabled={isPending} className="btn-primary disabled:opacity-60">
+          {isPending ? "Uploading..." : <><Upload className="h-4 w-4" /> Upload PDF</>}
+        </button>
       </form>
     </div>
-  );
-}
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <button type="submit" disabled={pending} className="btn-primary disabled:opacity-60">
-      {pending ? "Uploading..." : <><Upload className="h-4 w-4" /> Upload PDF</>}
-    </button>
   );
 }
