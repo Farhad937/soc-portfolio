@@ -19,18 +19,18 @@ export default async function CertificationsPage() {
     <section className="section">
       <SectionHeading kicker="// Credentials" title="Certifications" />
       <div className="grid gap-5 sm:grid-cols-2">
-        {certifications.map((cert) => {
+        {certifications.map((cert, index) => {
           const meta = statusMeta[cert.status];
           const Icon = meta.icon;
           return (
-            <div key={cert.name} className="card animate-fade-in p-6">
+            <div key={cert.name} className="card group animate-scale-in p-6" style={{ animationDelay: `${index * 80}ms` }}>
               <div className={`mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide ${meta.color}`}>
                 <Icon className="h-3.5 w-3.5" />
                 {cert.status}
               </div>
               <div className="flex items-start gap-3">
                 {cert.logo && (
-                  <img src={cert.logo} alt="" className="h-10 w-10 shrink-0 animate-fade-in rounded-md border border-border bg-white p-1 object-contain [animation-delay:100ms]" />
+                  <img src={cert.logo} alt="" className="h-10 w-10 shrink-0 rounded-md border border-border bg-white p-1 object-contain transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3" />
                 )}
                 <div>
                   <h3 className="text-lg font-semibold text-text">{cert.name}</h3>

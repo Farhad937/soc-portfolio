@@ -16,7 +16,7 @@ export default async function HomeLabPage() {
         description="The environment behind every project on this site."
       />
 
-      <div className="card mb-12 animate-fade-in p-6">
+      <div className="card mb-12 animate-slide-in p-6">
         <p className="log-divider mb-4">Hardware</p>
         <p className="text-text-muted">{pageContent.hardwareDescription}</p>
         <p className="log-divider mb-4 mt-8">Virtualization</p>
@@ -25,8 +25,8 @@ export default async function HomeLabPage() {
 
       <p className="log-divider mb-6">Virtual Machines</p>
       <div className="mb-12 grid gap-4 sm:grid-cols-2">
-        {vms.map((vm) => (
-          <div key={vm.id} className="card animate-fade-in p-5">
+        {vms.map((vm, index) => (
+          <div key={vm.id} className="card animate-scale-in p-5" style={{ animationDelay: `${index * 80}ms` }}>
             <h3 className="font-medium text-text">{vm.name}</h3>
             {vm.category && <p className="mt-1 font-mono text-xs text-text-faint">{vm.category}</p>}
             {vm.description && <p className="mt-2 text-sm text-text-muted">{vm.description}</p>}
@@ -39,7 +39,7 @@ export default async function HomeLabPage() {
         ))}
       </div>
 
-      <div className="card animate-fade-in p-6">
+      <div className="card animate-scale-in p-6">
         <p className="log-divider mb-4">Network Diagram</p>
         <div className="flex aspect-video items-center justify-center rounded-md border border-dashed border-border-strong bg-bg-raised">
           <p className="px-4 text-center font-mono text-xs text-text-faint">{pageContent.networkDiagramNote}</p>

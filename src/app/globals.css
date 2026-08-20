@@ -47,7 +47,27 @@
   }
 
   .interactive-card {
-    @apply transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-border-strong focus-visible:-translate-y-0.5 focus-visible:border-border-strong;
+    @apply transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/60 focus-visible:-translate-y-1 focus-visible:scale-[1.01] focus-visible:border-accent/60;
+  }
+
+  .motion-link {
+    position: relative;
+  }
+  .motion-link::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 200ms ease-out;
+  }
+  .motion-link:hover::after,
+  .motion-link:focus-visible::after {
+    transform: scaleX(1);
   }
 
   .kicker {

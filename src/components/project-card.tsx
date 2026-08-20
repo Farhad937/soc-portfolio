@@ -8,11 +8,12 @@ const statusColor: Record<Project["status"], string> = {
   Planned: "text-text-faint",
 };
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="card interactive-card group flex h-full animate-fade-in flex-col justify-between p-6"
+      className="card interactive-card group flex h-full animate-slide-in flex-col justify-between p-6"
+      style={{ animationDelay: `${index * 80}ms` }}
     >
       <div>
         <div className="mb-3 flex items-center justify-between">

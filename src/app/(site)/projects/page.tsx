@@ -17,8 +17,8 @@ export default async function ProjectsPage() {
         description="Home lab builds and investigations. Each one follows the same structure: objective, environment, investigation, findings, lessons learned."
       />
       <div className="grid gap-5 sm:grid-cols-2">
-        {projects.map((p) => (
-          <ProjectCard key={p.slug} project={p} />
+        {projects.map((p, index) => (
+          <ProjectCard key={p.slug} project={p} index={index} />
         ))}
       </div>
     </section>

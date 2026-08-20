@@ -23,15 +23,15 @@ export default async function TryHackMePage() {
         description="Organized by path rather than a raw room list. No flags or full walkthroughs — see Write-ups for concept notes instead."
       />
       <div className="space-y-8">
-        {thmPaths.map((path) => (
-          <div key={path.name} className="card animate-fade-in p-6">
+        {thmPaths.map((path, index) => (
+          <div key={path.name} className="card animate-scale-in p-6" style={{ animationDelay: `${index * 90}ms` }}>
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-semibold text-text">{path.name}</h3>
               <span className="font-mono text-xs text-text-muted">{path.progress}%</span>
             </div>
             <div className="mb-5 h-1.5 w-full overflow-hidden rounded-full bg-bg-raised">
               <div
-                className="h-full rounded-full bg-accent transition-all"
+                className="h-full origin-left animate-progress-fill rounded-full bg-accent"
                 style={{ width: `${path.progress}%` }}
               />
             </div>

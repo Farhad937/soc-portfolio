@@ -16,8 +16,8 @@ export default async function SkillsPage() {
         description="Organized the way I'd want a hiring manager to scan them — by domain, not chronology."
       />
       <div className="grid gap-5 sm:grid-cols-2">
-        {skillGroups.map((group) => (
-          <div key={group.category} className="card animate-fade-in p-6">
+        {skillGroups.map((group, index) => (
+          <div key={group.category} className="card animate-scale-in p-6" style={{ animationDelay: `${index * 80}ms` }}>
             <h3 className="mb-4 font-mono text-xs uppercase tracking-wide text-accent">
               {group.category}
             </h3>

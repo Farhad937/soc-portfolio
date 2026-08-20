@@ -56,7 +56,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
         <img
           src={project.featuredImage}
           alt={project.title}
-          className="mt-8 w-full animate-fade-in rounded-lg border border-border object-cover [animation-delay:100ms]"
+          className="mt-8 w-full animate-scale-in rounded-lg border border-border object-cover [animation-delay:100ms]"
         />
       )}
 
@@ -66,8 +66,8 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
 
       {project.gallery && project.gallery.length > 0 && (
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {project.gallery.map((url) => (
-            <img key={url} src={url} alt="" className="aspect-video w-full animate-fade-in rounded-md border border-border object-cover" />
+          {project.gallery.map((url, index) => (
+            <img key={url} src={url} alt="" className="aspect-video w-full animate-scale-in rounded-md border border-border object-cover" style={{ animationDelay: `${index * 75}ms` }} />
           ))}
         </div>
       )}

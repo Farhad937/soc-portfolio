@@ -47,8 +47,8 @@ export default async function DashboardPage() {
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {stats.map(({ label, value, icon: Icon }) => (
-          <div key={label} className="card animate-fade-in p-6">
+        {stats.map(({ label, value, icon: Icon }, index) => (
+          <div key={label} className="card animate-scale-in p-6" style={{ animationDelay: `${index * 60}ms` }}>
             <div className="mb-4 flex items-center justify-between">
               <Icon className="h-5 w-5 text-accent" />
               <span className="font-mono text-[11px] uppercase tracking-wide text-text-faint">
@@ -63,14 +63,14 @@ export default async function DashboardPage() {
       <div className="mt-12">
         <p className="log-divider mb-4">By TryHackMe Path</p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {thmPaths.map((path) => (
-            <div key={path.name} className="card animate-fade-in p-4">
+          {thmPaths.map((path, index) => (
+            <div key={path.name} className="card animate-slide-in p-4" style={{ animationDelay: `${index * 75}ms` }}>
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm font-medium text-text">{path.name}</span>
                 <span className="font-mono text-xs text-text-muted">{path.progress}%</span>
               </div>
               <div className="h-1.5 w-full overflow-hidden rounded-full bg-bg-raised">
-                <div className="h-full rounded-full bg-accent" style={{ width: `${path.progress}%` }} />
+                <div className="h-full origin-left animate-progress-fill rounded-full bg-accent" style={{ width: `${path.progress}%` }} />
               </div>
             </div>
           ))}

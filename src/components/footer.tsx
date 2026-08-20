@@ -17,16 +17,16 @@ export default function Footer({ site }: { site: SiteSettings }) {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <a href={site.githubUrl} target="_blank" rel="noopener noreferrer" className="text-text-muted transition-all hover:-translate-y-0.5 hover:text-accent focus-visible:-translate-y-0.5 focus-visible:text-accent" aria-label="GitHub">
+          <a href={site.githubUrl} target="_blank" rel="noopener noreferrer" className="text-text-muted transition-all hover:-translate-y-0.5 hover:scale-110 hover:text-accent focus-visible:-translate-y-0.5 focus-visible:scale-110 focus-visible:text-accent" aria-label="GitHub">
             <Github className="h-5 w-5" />
           </a>
-          <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-text-muted transition-all hover:-translate-y-0.5 hover:text-accent focus-visible:-translate-y-0.5 focus-visible:text-accent" aria-label="LinkedIn">
+          <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-text-muted transition-all hover:-translate-y-0.5 hover:scale-110 hover:text-accent focus-visible:-translate-y-0.5 focus-visible:scale-110 focus-visible:text-accent" aria-label="LinkedIn">
             <Linkedin className="h-5 w-5" />
           </a>
-          <a href={site.tryhackmeUrl} target="_blank" rel="noopener noreferrer" className="text-text-muted transition-all hover:-translate-y-0.5 hover:text-accent focus-visible:-translate-y-0.5 focus-visible:text-accent" aria-label="TryHackMe">
+          <a href={site.tryhackmeUrl} target="_blank" rel="noopener noreferrer" className="text-text-muted transition-all hover:-translate-y-0.5 hover:scale-110 hover:text-accent focus-visible:-translate-y-0.5 focus-visible:scale-110 focus-visible:text-accent" aria-label="TryHackMe">
             <Terminal className="h-5 w-5" />
           </a>
-          <a href={`mailto:${site.email}`} className="text-text-muted transition-all hover:-translate-y-0.5 hover:text-accent focus-visible:-translate-y-0.5 focus-visible:text-accent" aria-label="Email">
+          <a href={`mailto:${site.email}`} className="text-text-muted transition-all hover:-translate-y-0.5 hover:scale-110 hover:text-accent focus-visible:-translate-y-0.5 focus-visible:scale-110 focus-visible:text-accent" aria-label="Email">
             <Mail className="h-5 w-5" />
           </a>
           <Link href="/admin/login" className="text-text-faint hover:text-accent" aria-label="Admin">

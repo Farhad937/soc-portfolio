@@ -35,12 +35,27 @@ const config: Config = {
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-out forwards",
+        "scale-in": "scaleIn 0.45s ease-out forwards",
+        "slide-in": "slideIn 0.5s ease-out forwards",
+        "progress-fill": "progressFill 0.7s ease-out forwards",
         blink: "blink 2s step-start infinite",
       },
       keyframes: {
         fadeIn: {
           "0%": { opacity: "0", transform: "translateY(6px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        scaleIn: {
+          "0%": { opacity: "0", transform: "scale(0.96)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        slideIn: {
+          "0%": { opacity: "0", transform: "translateX(-12px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        progressFill: {
+          "0%": { transform: "scaleX(0)" },
+          "100%": { transform: "scaleX(1)" },
         },
         blink: {
           "0%, 100%": { opacity: "1" },

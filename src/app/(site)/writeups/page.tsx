@@ -17,8 +17,8 @@ export default async function WriteupsPage() {
         description="Concept explanations from my own study. Never TryHackMe flags or complete room walkthroughs — the focus is always the underlying idea."
       />
       <div className="grid gap-5 sm:grid-cols-2">
-        {writeups.map((w) => (
-          <WriteupCard key={w.slug} writeup={w} />
+        {writeups.map((w, index) => (
+          <WriteupCard key={w.slug} writeup={w} index={index} />
         ))}
       </div>
     </section>

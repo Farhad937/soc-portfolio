@@ -45,7 +45,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
+                className={`motion-link rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
                   active ? "text-accent" : "text-text-muted hover:text-text"
                 }`}
               >
@@ -77,12 +77,12 @@ export default function Nav({ site }: { site: SiteSettings }) {
       </div>
 
       {open && (
-        <nav className="animate-fade-in border-t border-border bg-bg px-6 py-4 lg:hidden">
+        <nav className="animate-slide-in border-t border-border bg-bg px-6 py-4 lg:hidden">
           <div className="flex flex-col gap-1">
             <Link
               href="/search"
               onClick={() => setOpen(false)}
-              className={`flex items-center gap-2 rounded-md px-3 py-2.5 text-sm ${
+              className={`motion-link flex items-center gap-2 rounded-md px-3 py-2.5 text-sm ${
                 pathname === "/search" ? "text-accent" : "text-text-muted"
               }`}
             >
@@ -93,7 +93,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`rounded-md px-3 py-2.5 text-sm ${
+                className={`motion-link rounded-md px-3 py-2.5 text-sm ${
                   pathname === link.href ? "text-accent" : "text-text-muted"
                 }`}
               >
