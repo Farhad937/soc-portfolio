@@ -19,38 +19,38 @@ export default async function AboutPage() {
   return (
     <>
     <section className="section">
-      <SectionHeading kicker="// About" title="About Me" />
+      <SectionHeading kicker="// About" title="About Me" motion="about" />
 
       <div className="grid gap-12 md:grid-cols-[1fr_1.4fr]">
-        <div className="card h-fit animate-scale-in p-6">
-          <div className="flex aspect-square w-full animate-fade-in items-center justify-center overflow-hidden rounded-2xl border border-dashed border-border-strong bg-bg-raised transition-colors duration-300 hover:border-accent/60 [animation-delay:100ms]">
+        <div className="card about-profile-card h-fit animate-slide-in p-6">
+          <div className="group flex aspect-square w-full animate-scale-in items-center justify-center overflow-hidden rounded-2xl border border-dashed border-border-strong bg-bg-raised transition-colors duration-300 hover:border-accent/60 [animation-delay:100ms]">
             {about.profileImage ? (
-              <img src={about.profileImage} alt="Professional profile" className="h-full rounded-2xl object-contain" />
+              <img src={about.profileImage} alt="Professional profile" className="h-full rounded-2xl object-contain transition-transform duration-300 group-hover:scale-[1.025] group-hover:rotate-1" />
             ) : (
               <p className="px-4 text-center font-mono text-xs text-text-faint">[ professional photo ]</p>
             )}
           </div>
           <dl className="mt-6 space-y-2 font-mono text-xs text-text-muted">
-            <div className="flex justify-between"><dt>role</dt><dd className="text-text">{site.role}</dd></div>
-            <div className="flex justify-between"><dt>location</dt><dd className="text-text">{site.location}</dd></div>
-            <div className="flex justify-between"><dt>focus</dt><dd className="text-text">Blue Team / SOC</dd></div>
+            <div className="flex animate-fade-in justify-between transition-transform duration-200 hover:translate-x-1 hover:text-accent [animation-delay:175ms]"><dt>role</dt><dd className="text-text">{site.role}</dd></div>
+            <div className="flex animate-fade-in justify-between transition-transform duration-200 hover:translate-x-1 hover:text-accent [animation-delay:225ms]"><dt>location</dt><dd className="text-text">{site.location}</dd></div>
+            <div className="flex animate-fade-in justify-between transition-transform duration-200 hover:translate-x-1 hover:text-accent [animation-delay:275ms]"><dt>focus</dt><dd className="text-text">Blue Team / SOC</dd></div>
           </dl>
         </div>
 
-        <div className="space-y-6 animate-slide-in text-text-muted [animation-delay:125ms]">
-          <p>{about.engineeringBackground}</p>
-          <p>{about.securityTransition}</p>
-          <p>{about.defensiveSecurityReason}</p>
+        <div className="space-y-6 text-text-muted">
+          <p className="animate-fade-in [animation-delay:125ms]">{about.engineeringBackground}</p>
+          <p className="animate-fade-in [animation-delay:175ms]">{about.securityTransition}</p>
+          <p className="animate-fade-in [animation-delay:225ms]">{about.defensiveSecurityReason}</p>
 
-          <div className="log-divider">Current Focus</div>
+          <div className="log-divider about-divider">Current Focus</div>
           <ul className="list-inside list-disc space-y-1">
-            {about.currentFocus.map((item) => (
-              <li key={item}>{item}</li>
+            {about.currentFocus.map((item, index) => (
+              <li key={item} className="animate-slide-in transition-all hover:translate-x-1 hover:text-text marker:text-accent" style={{ animationDelay: `${275 + index * 50}ms` }}>{item}</li>
             ))}
           </ul>
 
-          <div className="log-divider">Career Goal</div>
-          <p>{about.careerGoal}</p>
+          <div className="log-divider about-divider">Career Goal</div>
+          <p className="animate-fade-in [animation-delay:475ms]">{about.careerGoal}</p>
         </div>
       </div>
     </section>
@@ -60,7 +60,7 @@ export default async function AboutPage() {
         <SectionHeading kicker="// Career" title="Experience" />
         <div className="space-y-6">
           {experience.map((entry, index) => (
-            <div key={entry.id} className="card animate-slide-in p-6" style={{ animationDelay: `${index * 75}ms` }}>
+            <div key={entry.id} className="card about-experience-card animate-slide-in p-6" style={{ animationDelay: `${index * 90}ms` }}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-lg font-semibold text-text">
                   {entry.position} <span className="text-text-muted">· {entry.company}</span>
@@ -100,7 +100,7 @@ export default async function AboutPage() {
         <SectionHeading kicker="// Academics" title="Education" />
         <div className="space-y-6">
           {education.map((entry, index) => (
-            <div key={entry.id} className="card animate-scale-in p-6" style={{ animationDelay: `${index * 75}ms` }}>
+            <div key={entry.id} className="card about-education-card animate-scale-in p-6" style={{ animationDelay: `${index * 90}ms` }}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-lg font-semibold text-text">
                   {entry.degree} <span className="text-text-muted">· {entry.institution}</span>

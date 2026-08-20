@@ -38,6 +38,8 @@ const config: Config = {
         "scale-in": "scaleIn 0.45s ease-out forwards",
         "slide-in": "slideIn 0.5s ease-out forwards",
         "progress-fill": "progressFill 0.7s ease-out forwards",
+        "hero-kicker": "heroKicker 0.55s ease-out forwards",
+        "hero-heading": "heroHeading 0.6s ease-out forwards",
         blink: "blink 2s step-start infinite",
       },
       keyframes: {
@@ -56,6 +58,14 @@ const config: Config = {
         progressFill: {
           "0%": { transform: "scaleX(0)" },
           "100%": { transform: "scaleX(1)" },
+        },
+        heroKicker: {
+          "0%": { opacity: "0", transform: "translateY(-10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        heroHeading: {
+          "0%": { opacity: "0", transform: "translateY(14px) scale(0.97)" },
+          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
         },
         blink: {
           "0%, 100%": { opacity: "1" },

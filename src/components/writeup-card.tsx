@@ -2,11 +2,11 @@ import Link from "next/link";
 import { Clock, ArrowUpRight } from "lucide-react";
 import type { Writeup } from "@/lib/writeups";
 
-export default function WriteupCard({ writeup, index = 0 }: { writeup: Writeup; index?: number }) {
+export default function WriteupCard({ writeup, index = 0, motion }: { writeup: Writeup; index?: number; motion?: "home" }) {
   return (
     <Link
       href={`/writeups/${writeup.slug}`}
-      className="card interactive-card group flex animate-scale-in flex-col justify-between p-6"
+      className={`card group flex flex-col justify-between p-6 ${motion === "home" ? "home-writeup-card animate-slide-in" : "interactive-card animate-scale-in"}`}
       style={{ animationDelay: `${index * 80}ms` }}
     >
       <div>
