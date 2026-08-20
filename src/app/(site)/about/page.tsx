@@ -23,7 +23,7 @@ export default async function AboutPage() {
 
       <div className="grid gap-12 md:grid-cols-[1fr_1.4fr]">
         <div className="card h-fit p-6">
-          <div className="aspect-square w-full rounded-md border border-dashed border-border-strong bg-bg-raised flex items-center justify-center">
+          <div className="aspect-square w-full overflow-hidden rounded-2xl border border-dashed border-border-strong bg-bg-raised flex items-center justify-center">
             {about.profileImage ? (
               <img src={about.profileImage} alt="Professional profile" className="h-full w-full rounded-2xl object-contain" />
             ) : (
