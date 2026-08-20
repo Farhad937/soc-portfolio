@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ShieldHalf, LogOut } from "lucide-react";
+import { ExternalLink, ShieldHalf, LogOut } from "lucide-react";
 import { getAuthenticatedUser } from "@/lib/supabase/auth-server";
 import AdminSidebar from "@/components/admin-sidebar";
 import { logout } from "../actions";
@@ -25,11 +26,16 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
             <span>Admin</span>
             <span className="font-mono text-xs text-text-faint">/ {user.email}</span>
           </div>
-          <form action={logout}>
-            <button type="submit" className="btn-secondary text-sm">
-              <LogOut className="h-4 w-4" /> Sign out
-            </button>
-          </form>
+          <div className="flex items-center gap-2">
+            <Link href="/" target="_blank" rel="noopener noreferrer" className="btn-secondary text-sm">
+              <ExternalLink className="h-4 w-4" /> View Site
+            </Link>
+            <form action={logout}>
+              <button type="submit" className="btn-secondary text-sm">
+                <LogOut className="h-4 w-4" /> Sign out
+              </button>
+            </form>
+          </div>
         </div>
       </header>
       <div className="flex flex-1">
