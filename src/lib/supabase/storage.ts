@@ -5,7 +5,7 @@ import { getSupabaseAdminClient } from "@/lib/supabase/admin-client";
 const BUCKET = "media";
 
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
-const MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 5MB
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024; // 10MB
 const MAX_PDF_BYTES = 10 * 1024 * 1024; // 10MB
 
 function sanitizeFilename(name: string): string {

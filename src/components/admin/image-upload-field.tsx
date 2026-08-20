@@ -4,6 +4,8 @@ import { useRef, useState, useTransition } from "react";
 import { Upload, X, Loader2 } from "lucide-react";
 import { uploadMedia } from "@/lib/admin-content/media-mutations";
 
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+
 /**
  * Uploads directly on file selection (no separate "Upload" button) and
  * writes the resulting public URL into a hidden input with `name`, so
@@ -31,17 +33,29 @@ export default function ImageUploadField({
     if (!file) return;
     setError(null);
 
+    if (file.size > MAX_IMAGE_BYTES) {
+      setError("Image too large (max 10MB).");
+      e.target.value = "";
+      return;
+    }
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("folder", folder);
     formData.append("kind", "image");
 
     startTransition(async () => {
-      const result = await uploadMedia({ error: null }, formData);
-      if (result.error) {
-        setError(result.error);
-      } else if (result.publicUrl) {
-        setUrl(result.publicUrl);
+      try {
+        const result = await uploadMedia({ error: null }, formData);
+        if (result?.error) {
+          setError(result.error);
+        } else if (result?.publicUrl) {
+          setUrl(result.publicUrl);
+        } else {
+          setError("Upload failed. Please try again.");
+        }
+      } catch {
+        setError("Upload failed. Please try again.");
       }
       if (fileInputRef.current) fileInputRef.current.value = "";
     });

@@ -9,6 +9,7 @@ import type { MediaFile } from "@/lib/supabase/storage";
 export default function MediaLibrary({ initialFiles }: { initialFiles: MediaFile[] }) {
   const [files, setFiles] = useState(initialFiles);
   const [uploadState, formAction] = useFormState<MediaUploadState, FormData>(uploadMedia, { error: null });
+  const [clientUploadError, setClientUploadError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const [copiedPath, setCopiedPath] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -37,13 +38,23 @@ export default function MediaLibrary({ initialFiles }: { initialFiles: MediaFile
     setTimeout(() => setCopiedPath(null), 1500);
   }
 
+  function handleUploadSubmit(event: React.FormEvent<HTMLFormElement>) {
+    const file = fileInputRef.current?.files?.[0];
+    if (file && file.size > 10 * 1024 * 1024) {
+      event.preventDefault();
+      setClientUploadError("Image too large (max 10MB).");
+      return;
+    }
+    setClientUploadError(null);
+  }
+
   return (
     <div className="space-y-6">
-      <form action={formAction} className="card p-5">
-        {uploadState.error && (
+      <form action={formAction} onSubmit={handleUploadSubmit} className="card p-5">
+        {(clientUploadError ?? uploadState.error) && (
           <div className="mb-3 flex items-start gap-2 rounded-md border border-danger/30 bg-danger/10 p-3 text-sm text-danger">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-            {uploadState.error}
+            {clientUploadError ?? uploadState.error}
           </div>
         )}
         {uploadState.publicUrl && (
@@ -68,7 +79,7 @@ export default function MediaLibrary({ initialFiles }: { initialFiles: MediaFile
           />
           <UploadButton />
         </div>
-        <p className="mt-2 text-xs text-text-faint">JPEG, PNG, WebP, or GIF. Max 5MB.</p>
+        <p className="mt-2 text-xs text-text-faint">JPEG, PNG, WebP, or GIF. Max 10MB.</p>
       </form>
 
       {files.length === 0 ? (
