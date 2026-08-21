@@ -45,7 +45,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`motion-link rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
+                className={`motion-link whitespace-nowrap rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
                   active ? "text-accent" : "text-text-muted hover:text-text"
                 }`}
               >

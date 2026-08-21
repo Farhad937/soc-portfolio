@@ -25,7 +25,7 @@ export default async function AboutPage() {
         <div className="card about-profile-card h-fit animate-slide-in p-6">
           <div className="group flex aspect-square w-full animate-scale-in items-center justify-center overflow-hidden rounded-2xl border border-dashed border-border-strong bg-bg-raised transition-colors duration-300 hover:border-accent/60 [animation-delay:100ms]">
             {about.profileImage ? (
-              <img src={about.profileImage} alt="Professional profile" className="h-full rounded-2xl object-contain transition-transform duration-300 group-hover:scale-[1.025] group-hover:rotate-1" />
+              <img src={about.profileImage} alt="Professional profile" className="h-full rounded-2xl object-contain transition-transform duration-300 group-hover:scale-[1.025] group-hover:rotate-2" />
             ) : (
               <p className="px-4 text-center font-mono text-xs text-text-faint">[ professional photo ]</p>
             )}

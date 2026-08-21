@@ -3,6 +3,7 @@ import { ArrowRight, FileDown, FolderKanban, Mail, NotebookText } from "lucide-r
 import { getSiteSettings } from "@/lib/content/site-settings";
 import { getProjects } from "@/lib/content/projects";
 import { getWriteups } from "@/lib/content/writeups";
+import { getAboutPageContent } from "@/lib/content/about";
 import ProjectCard from "@/components/project-card";
 import WriteupCard from "@/components/writeup-card";
 import SectionHeading from "@/components/section-heading";
@@ -10,41 +11,51 @@ import SectionHeading from "@/components/section-heading";
 export const revalidate = 3600; // ISR: re-fetch from Supabase at most once/hour
 
 export default async function Home() {
-  const [site, projects, writeups] = await Promise.all([
+  const [site, projects, writeups, about] = await Promise.all([
     getSiteSettings(),
     getProjects(),
     getWriteups(),
+    getAboutPageContent(),
   ]);
 
   return (
     <>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border">
-        <div className="mx-auto max-w-5xl px-6 py-24 md:px-8 md:py-32">
-          <p className="kicker mb-5 animate-hero-kicker">
-            {site.heroKicker}
-          </p>
-          <h1 className="max-w-3xl animate-hero-heading text-4xl font-semibold leading-[1.1] tracking-tight text-text [animation-delay:75ms] md:text-6xl">
-            Hi, I&apos;m {site.name}.
-          </h1>
-          <p className="mt-6 max-w-xl animate-fade-in text-lg text-text-muted [animation-delay:150ms]">
-            {site.role} {site.heroDescription}
-          </p>
+        <div className={`mx-auto max-w-5xl px-6 py-24 md:px-8 md:py-32 ${about.profileImage ? "grid items-center gap-12 md:grid-cols-[minmax(0,1fr)_minmax(14rem,20rem)]" : ""}`}>
+          <div>
+            <p className="kicker mb-5 animate-hero-kicker">
+              {site.heroKicker}
+            </p>
+            <h1 className="max-w-3xl animate-hero-heading text-4xl font-semibold leading-[1.1] tracking-tight text-text [animation-delay:75ms] md:text-6xl">
+              Hi, I&apos;m {site.name}.
+            </h1>
+            <p className="mt-6 max-w-xl animate-fade-in text-lg text-text-muted [animation-delay:150ms]">
+              {site.role} {site.heroDescription}
+            </p>
 
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link href={site.heroButtons[0].url} className="btn-primary group animate-scale-in hover:-translate-y-1 hover:scale-[1.02] [animation-delay:225ms]">
-              {site.heroButtons[0].label} <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
-            </Link>
-            <Link href={site.heroButtons[1].url} className="btn-secondary animate-scale-in hover:-translate-y-1 hover:border-accent hover:bg-bg-surface [animation-delay:275ms]">
-              {site.heroButtons[1].label}
-            </Link>
-            <Link href={site.heroButtons[2].url} className="btn-secondary group animate-scale-in hover:-translate-y-1 hover:border-accent [animation-delay:325ms]">
-              <FileDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5 group-focus-visible:translate-y-0.5" /> {site.heroButtons[2].label}
-            </Link>
-            <Link href={site.heroButtons[3].url} className="btn-secondary group animate-scale-in hover:-translate-y-1 hover:border-accent [animation-delay:375ms]">
-              <Mail className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:-rotate-6 group-focus-visible:-translate-y-0.5 group-focus-visible:-rotate-6" /> {site.heroButtons[3].label}
-            </Link>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link href={site.heroButtons[0].url} className="btn-primary group animate-scale-in hover:-translate-y-1 hover:scale-[1.02] [animation-delay:225ms]">
+                {site.heroButtons[0].label} <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
+              </Link>
+              <Link href={site.heroButtons[1].url} className="btn-secondary animate-scale-in hover:-translate-y-1 hover:border-accent hover:bg-bg-surface [animation-delay:275ms]">
+                {site.heroButtons[1].label}
+              </Link>
+              <Link href={site.heroButtons[2].url} className="btn-secondary group animate-scale-in hover:-translate-y-1 hover:border-accent [animation-delay:325ms]">
+                <FileDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5 group-focus-visible:translate-y-0.5" /> {site.heroButtons[2].label}
+              </Link>
+              <Link href={site.heroButtons[3].url} className="btn-secondary group animate-scale-in hover:-translate-y-1 hover:border-accent [animation-delay:375ms]">
+                <Mail className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:-rotate-6 group-focus-visible:-translate-y-0.5 group-focus-visible:-rotate-6" /> {site.heroButtons[3].label}
+              </Link>
+            </div>
           </div>
+          {about.profileImage && (
+            <div className="justify-self-center md:justify-self-end">
+              <div className="aspect-[4/5] w-56 overflow-hidden rounded-2xl border border-border-strong bg-bg-raised md:w-72">
+                <img src={about.profileImage} alt="Professional profile" className="h-full w-full rounded-2xl object-contain" />
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
