@@ -24,7 +24,7 @@ export default async function Home() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border">
-        <div className={`mx-auto max-w-5xl px-6 py-24 md:px-8 md:py-32 ${about.profileImage ? "grid items-center gap-12 md:grid-cols-[minmax(0,1fr)_minmax(14rem,20rem)]" : ""}`}>
+        <div className={`mx-auto max-w-5xl px-6 py-24 md:px-8 md:py-32 ${about.profileImage ? "grid items-center gap-12 md:grid-cols-[1.4fr_1fr]" : ""}`}>
           <div>
             <p className="kicker mb-5 animate-hero-kicker">
               {site.heroKicker}
@@ -53,7 +53,7 @@ export default async function Home() {
           </div>
           {about.profileImage && (
             <div className="animate-slide-in justify-self-center md:justify-self-end">
-              <div className="card about-profile-card w-56 p-6 md:w-72">
+              <div className="card about-profile-card w-full p-6">
                 <ProfileImageFrame src={about.profileImage} />
               </div>
             </div>

@@ -17,7 +17,7 @@ export default async function JourneyPage() {
       />
       <ol className="relative border-l border-border pl-8">
         {timeline.map((entry, i) => (
-          <li key={i} className="mb-10 animate-slide-in last:mb-0" style={{ animationDelay: `${i * 90}ms` }}>
+          <li key={i} className="relative mb-10 animate-slide-in last:mb-0" style={{ animationDelay: `${i * 90}ms` }}>
             <span className="absolute -left-[7px] mt-1.5 h-3 w-3 rounded-full border-2 border-accent bg-bg" />
             <p className="font-mono text-xs text-accent">{entry.date}</p>
             <h3 className="mt-1 text-lg font-medium text-text">{entry.title}</h3>
