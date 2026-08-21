@@ -4,6 +4,7 @@ import { getSiteSettings } from "@/lib/content/site-settings";
 import { getExperience } from "@/lib/content/experience";
 import { getEducation } from "@/lib/content/education";
 import { getAboutPageContent } from "@/lib/content/about";
+import ProfileImageFrame from "@/components/profile-image-frame";
 
 export const metadata = { title: `About — ${staticSite.name}` };
 export const revalidate = 3600;
@@ -22,19 +23,15 @@ export default async function AboutPage() {
       <SectionHeading kicker="// About" title="About Me" motion="about" />
 
       <div className="grid gap-12 md:grid-cols-[1fr_1.4fr]">
-        <div className="card about-profile-card h-fit animate-slide-in p-6">
-          <div className="group flex aspect-square w-full animate-scale-in items-center justify-center overflow-hidden rounded-2xl border border-dashed border-border-strong bg-bg-raised transition-colors duration-300 hover:border-accent/60 [animation-delay:100ms]">
-            {about.profileImage ? (
-              <img src={about.profileImage} alt="Professional profile" className="h-full rounded-2xl object-contain transition-transform duration-300 group-hover:scale-[1.025] group-hover:rotate-2" />
-            ) : (
-              <p className="px-4 text-center font-mono text-xs text-text-faint">[ professional photo ]</p>
-            )}
+        <div className="animate-slide-in">
+          <div className="card about-profile-card h-fit p-6">
+            <ProfileImageFrame src={about.profileImage} />
+            <dl className="mt-6 space-y-2 font-mono text-xs text-text-muted">
+              <div className="flex animate-fade-in justify-between transition-transform duration-200 hover:translate-x-1 hover:text-accent [animation-delay:175ms]"><dt>role</dt><dd className="text-text">{site.role}</dd></div>
+              <div className="flex animate-fade-in justify-between transition-transform duration-200 hover:translate-x-1 hover:text-accent [animation-delay:225ms]"><dt>location</dt><dd className="text-text">{site.location}</dd></div>
+              <div className="flex animate-fade-in justify-between transition-transform duration-200 hover:translate-x-1 hover:text-accent [animation-delay:275ms]"><dt>focus</dt><dd className="text-text">Blue Team / SOC</dd></div>
+            </dl>
           </div>
-          <dl className="mt-6 space-y-2 font-mono text-xs text-text-muted">
-            <div className="flex animate-fade-in justify-between transition-transform duration-200 hover:translate-x-1 hover:text-accent [animation-delay:175ms]"><dt>role</dt><dd className="text-text">{site.role}</dd></div>
-            <div className="flex animate-fade-in justify-between transition-transform duration-200 hover:translate-x-1 hover:text-accent [animation-delay:225ms]"><dt>location</dt><dd className="text-text">{site.location}</dd></div>
-            <div className="flex animate-fade-in justify-between transition-transform duration-200 hover:translate-x-1 hover:text-accent [animation-delay:275ms]"><dt>focus</dt><dd className="text-text">Blue Team / SOC</dd></div>
-          </dl>
         </div>
 
         <div className="space-y-6 text-text-muted">

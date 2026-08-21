@@ -7,6 +7,7 @@ import { getAboutPageContent } from "@/lib/content/about";
 import ProjectCard from "@/components/project-card";
 import WriteupCard from "@/components/writeup-card";
 import SectionHeading from "@/components/section-heading";
+import ProfileImageFrame from "@/components/profile-image-frame";
 
 export const revalidate = 3600; // ISR: re-fetch from Supabase at most once/hour
 
@@ -50,9 +51,9 @@ export default async function Home() {
             </div>
           </div>
           {about.profileImage && (
-            <div className="justify-self-center md:justify-self-end">
-              <div className="aspect-[4/5] w-56 overflow-hidden rounded-2xl border border-border-strong bg-bg-raised md:w-72">
-                <img src={about.profileImage} alt="Professional profile" className="h-full w-full rounded-2xl object-contain" />
+            <div className="animate-slide-in justify-self-center md:justify-self-end">
+              <div className="card about-profile-card w-56 p-6 md:w-72">
+                <ProfileImageFrame src={about.profileImage} />
               </div>
             </div>
           )}

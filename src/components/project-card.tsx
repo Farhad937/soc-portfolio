@@ -10,11 +10,12 @@ const statusColor: Record<Project["status"], string> = {
 
 export default function ProjectCard({ project, index = 0, motion }: { project: Project; index?: number; motion?: "home" }) {
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className={`card group flex h-full flex-col justify-between p-6 ${motion === "home" ? "home-project-card animate-scale-in" : "interactive-card animate-slide-in"}`}
-      style={{ animationDelay: `${index * 80}ms` }}
-    >
+    <div className={motion === "home" ? "h-full animate-scale-in" : "h-full"} style={motion === "home" ? { animationDelay: `${index * 80}ms` } : undefined}>
+      <Link
+        href={`/projects/${project.slug}`}
+        className={`card group flex h-full flex-col justify-between p-6 ${motion === "home" ? "home-project-card" : "interactive-card animate-slide-in"}`}
+        style={motion === "home" ? undefined : { animationDelay: `${index * 80}ms` }}
+      >
       <div>
         <div className="mb-3 flex items-center justify-between">
           <span className="font-mono text-[11px] uppercase tracking-wide text-text-faint">
@@ -35,6 +36,7 @@ export default function ProjectCard({ project, index = 0, motion }: { project: P
           <span key={t} className="tag">{t}</span>
         ))}
       </div>
-    </Link>
+      </Link>
+    </div>
   );
 }

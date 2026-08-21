@@ -4,11 +4,12 @@ import type { Writeup } from "@/lib/writeups";
 
 export default function WriteupCard({ writeup, index = 0, motion }: { writeup: Writeup; index?: number; motion?: "home" }) {
   return (
-    <Link
-      href={`/writeups/${writeup.slug}`}
-      className={`card group flex flex-col justify-between p-6 ${motion === "home" ? "home-writeup-card animate-slide-in" : "interactive-card animate-scale-in"}`}
-      style={{ animationDelay: `${index * 80}ms` }}
-    >
+    <div className={motion === "home" ? "animate-slide-in" : ""} style={motion === "home" ? { animationDelay: `${index * 80}ms` } : undefined}>
+      <Link
+        href={`/writeups/${writeup.slug}`}
+        className={`card group flex flex-col justify-between p-6 ${motion === "home" ? "home-writeup-card" : "interactive-card animate-scale-in"}`}
+        style={motion === "home" ? undefined : { animationDelay: `${index * 80}ms` }}
+      >
       <div>
         <div className="mb-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-wide text-text-faint">
           <span>{writeup.category}</span>
@@ -24,6 +25,7 @@ export default function WriteupCard({ writeup, index = 0, motion }: { writeup: W
         <p className="mt-2 text-sm text-text-muted">{writeup.summary}</p>
       </div>
       <span className="tag mt-5 w-fit">{writeup.difficulty}</span>
-    </Link>
+      </Link>
+    </div>
   );
 }
