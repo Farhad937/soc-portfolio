@@ -96,6 +96,25 @@
     border-color: rgba(79, 140, 255, 0.7);
   }
 
+  .scroll-reveal-item {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+    transition: opacity 500ms ease-out, transform 500ms ease-out;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .scroll-reveal-grid[data-revealed="true"] .scroll-reveal-item {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   .about-profile-card,
   .about-experience-card,
   .about-education-card {

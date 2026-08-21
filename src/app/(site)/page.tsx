@@ -8,6 +8,7 @@ import ProjectCard from "@/components/project-card";
 import WriteupCard from "@/components/writeup-card";
 import SectionHeading from "@/components/section-heading";
 import ProfileImageFrame from "@/components/profile-image-frame";
+import ScrollRevealGrid from "@/components/scroll-reveal-grid";
 
 export const revalidate = 3600; // ISR: re-fetch from Supabase at most once/hour
 
@@ -90,11 +91,11 @@ export default async function Home() {
             <FolderKanban className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /> All projects
           </Link>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2">
+        <ScrollRevealGrid className="grid gap-5 sm:grid-cols-2">
           {projects.slice(0, 4).map((p, index) => (
             <ProjectCard key={p.slug} project={p} index={index} motion="home" />
           ))}
-        </div>
+        </ScrollRevealGrid>
       </section>
 
       {/* Featured writeups */}
@@ -110,11 +111,11 @@ export default async function Home() {
             <NotebookText className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /> All write-ups
           </Link>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2">
+        <ScrollRevealGrid className="grid gap-5 sm:grid-cols-2">
           {writeups.slice(0, 4).map((w, index) => (
             <WriteupCard key={w.slug} writeup={w} index={index} motion="home" />
           ))}
-        </div>
+        </ScrollRevealGrid>
       </section>
     </>
   );

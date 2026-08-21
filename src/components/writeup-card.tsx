@@ -4,7 +4,7 @@ import type { Writeup } from "@/lib/writeups";
 
 export default function WriteupCard({ writeup, index = 0, motion }: { writeup: Writeup; index?: number; motion?: "home" }) {
   return (
-    <div className={motion === "home" ? "animate-slide-in" : ""} style={motion === "home" ? { animationDelay: `${index * 80}ms` } : undefined}>
+    <div>
       <Link
         href={`/writeups/${writeup.slug}`}
         className={`card group flex flex-col justify-between p-6 ${motion === "home" ? "home-writeup-card" : "interactive-card animate-scale-in"}`}

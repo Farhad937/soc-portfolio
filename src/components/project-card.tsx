@@ -10,7 +10,7 @@ const statusColor: Record<Project["status"], string> = {
 
 export default function ProjectCard({ project, index = 0, motion }: { project: Project; index?: number; motion?: "home" }) {
   return (
-    <div className={motion === "home" ? "h-full animate-scale-in" : "h-full"} style={motion === "home" ? { animationDelay: `${index * 80}ms` } : undefined}>
+    <div className="h-full">
       <Link
         href={`/projects/${project.slug}`}
         className={`card group flex h-full flex-col justify-between p-6 ${motion === "home" ? "home-project-card" : "interactive-card animate-slide-in"}`}
