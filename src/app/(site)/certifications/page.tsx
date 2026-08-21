@@ -2,6 +2,7 @@ import SectionHeading from "@/components/section-heading";
 import { getCertifications } from "@/lib/content/certifications";
 import { site } from "@/lib/site";
 import { BadgeCheck, Clock, CalendarClock } from "lucide-react";
+import ScrollRevealGrid from "@/components/scroll-reveal-grid";
 
 export const metadata = { title: `Certifications — ${site.name}` };
 export const revalidate = 3600;
@@ -18,12 +19,12 @@ export default async function CertificationsPage() {
   return (
     <section className="section">
       <SectionHeading kicker="// Credentials" title="Certifications" />
-      <div className="grid gap-5 sm:grid-cols-2">
-        {certifications.map((cert, index) => {
+      <ScrollRevealGrid className="grid gap-5 sm:grid-cols-2">
+        {certifications.map((cert) => {
           const meta = statusMeta[cert.status];
           const Icon = meta.icon;
           return (
-            <div key={cert.name} className="card group animate-scale-in p-6" style={{ animationDelay: `${index * 80}ms` }}>
+            <div key={cert.name} className="card public-card group p-6">
               <div className={`mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide ${meta.color}`}>
                 <Icon className="h-3.5 w-3.5" />
                 {cert.status}
@@ -45,7 +46,7 @@ export default async function CertificationsPage() {
             </div>
           );
         })}
-      </div>
+      </ScrollRevealGrid>
     </section>
   );
 }

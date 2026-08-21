@@ -86,19 +86,21 @@ export default function SearchClient({ allResults }: { allResults: SearchResult[
         {results.map((r, i) => {
           const Icon = typeIcon[r.type];
           const content = (
-            <div className={`card flex animate-slide-in items-start gap-4 p-4 ${r.href ? "interactive-card" : ""}`} style={{ animationDelay: `${i * 50}ms` }}>
-              <Icon className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-[11px] uppercase tracking-wide text-text-faint">
-                    {r.type}
-                  </span>
+            <div className="animate-slide-in" style={{ animationDelay: `${i * 50}ms` }}>
+              <div className="card public-card flex items-start gap-4 p-4">
+                <Icon className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[11px] uppercase tracking-wide text-text-faint">
+                      {r.type}
+                    </span>
+                  </div>
+                  <p className="mt-1 flex items-center gap-1 font-medium text-text">
+                    {r.title}
+                    {r.href && <ArrowUpRight className="h-3.5 w-3.5 text-text-faint" />}
+                  </p>
+                  <p className="mt-0.5 truncate text-sm text-text-muted">{r.description}</p>
                 </div>
-                <p className="mt-1 flex items-center gap-1 font-medium text-text">
-                  {r.title}
-                  {r.href && <ArrowUpRight className="h-3.5 w-3.5 text-text-faint" />}
-                </p>
-                <p className="mt-0.5 truncate text-sm text-text-muted">{r.description}</p>
               </div>
             </div>
           );

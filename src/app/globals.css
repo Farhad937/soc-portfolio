@@ -50,6 +50,16 @@
     @apply transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/60 focus-visible:-translate-y-1 focus-visible:scale-[1.01] focus-visible:border-accent/60;
   }
 
+  .public-card {
+    transition: transform 300ms ease-out, border-color 300ms ease-out, box-shadow 300ms ease-out;
+  }
+  .public-card:hover,
+  .public-card:focus-visible {
+    transform: translateY(-0.375rem);
+    border-color: rgba(79, 140, 255, 0.7);
+    box-shadow: 0 12px 28px rgba(79, 140, 255, 0.1);
+  }
+
   .motion-link {
     position: relative;
   }

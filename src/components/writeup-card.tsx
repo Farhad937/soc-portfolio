@@ -4,11 +4,10 @@ import type { Writeup } from "@/lib/writeups";
 
 export default function WriteupCard({ writeup, index = 0, motion }: { writeup: Writeup; index?: number; motion?: "home" }) {
   return (
-    <div>
+    <div className="h-full">
       <Link
         href={`/writeups/${writeup.slug}`}
-        className={`card group flex flex-col justify-between p-6 ${motion === "home" ? "home-writeup-card" : "interactive-card animate-scale-in"}`}
-        style={motion === "home" ? undefined : { animationDelay: `${index * 80}ms` }}
+        className={`card group flex h-full flex-col justify-between p-6 ${motion === "home" ? "home-writeup-card" : "public-card"}`}
       >
       <div>
         <div className="mb-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-wide text-text-faint">

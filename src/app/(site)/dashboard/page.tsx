@@ -6,6 +6,7 @@ import { getThmPaths } from "@/lib/content/tryhackme";
 import { getSiteSettings } from "@/lib/content/site-settings";
 import { site as staticSite } from "@/lib/site";
 import { FolderKanban, NotebookText, Clock3, BadgeCheck, Terminal, Github, FileText } from "lucide-react";
+import ScrollRevealGrid from "@/components/scroll-reveal-grid";
 
 export const metadata = { title: `Dashboard — ${staticSite.name}` };
 export const revalidate = 3600;
@@ -46,9 +47,9 @@ export default async function DashboardPage() {
         description="Live counts pulled from Supabase — projects, write-ups, and certifications update this automatically as you publish them. Learning hours, GitHub repos, and blog articles come from site_settings and are still edited manually until the admin UI exists."
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {stats.map(({ label, value, icon: Icon }, index) => (
-          <div key={label} className="card animate-scale-in p-6" style={{ animationDelay: `${index * 60}ms` }}>
+      <ScrollRevealGrid className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {stats.map(({ label, value, icon: Icon }) => (
+          <div key={label} className="card public-card p-6">
             <div className="mb-4 flex items-center justify-between">
               <Icon className="h-5 w-5 text-accent" />
               <span className="font-mono text-[11px] uppercase tracking-wide text-text-faint">
@@ -58,13 +59,13 @@ export default async function DashboardPage() {
             <p className="font-mono text-3xl font-semibold text-text">{value}</p>
           </div>
         ))}
-      </div>
+      </ScrollRevealGrid>
 
       <div className="mt-12">
         <p className="log-divider mb-4">By TryHackMe Path</p>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {thmPaths.map((path, index) => (
-            <div key={path.name} className="card animate-slide-in p-4" style={{ animationDelay: `${index * 75}ms` }}>
+        <ScrollRevealGrid className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {thmPaths.map((path) => (
+            <div key={path.name} className="card public-card p-4">
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm font-medium text-text">{path.name}</span>
                 <span className="font-mono text-xs text-text-muted">{path.progress}%</span>
@@ -74,7 +75,7 @@ export default async function DashboardPage() {
               </div>
             </div>
           ))}
-        </div>
+        </ScrollRevealGrid>
       </div>
     </section>
   );

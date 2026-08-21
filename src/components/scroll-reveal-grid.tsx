@@ -2,7 +2,7 @@
 
 import { Children, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
-export default function ScrollRevealGrid({ children, className, stagger = 120 }: { children: ReactNode; className: string; stagger?: number }) {
+export default function ScrollRevealGrid({ children, className, stagger = 140 }: { children: ReactNode; className: string; stagger?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState(false);
 
@@ -22,7 +22,7 @@ export default function ScrollRevealGrid({ children, className, stagger = 120 }:
           observer.disconnect();
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0.3 },
     );
 
     observer.observe(grid);

@@ -18,14 +18,18 @@ export default async function ResumePage() {
           <a href={site.resumeUrl} download target="_blank" rel="noopener noreferrer" className="btn-primary mb-8 w-fit animate-fade-in">
             <FileDown className="h-4 w-4" /> Download PDF
           </a>
-          <div className="card max-w-2xl animate-fade-in overflow-hidden [animation-delay:100ms]">
-            <iframe src={site.resumeUrl} className="aspect-[8.5/11] w-full" title="Resume preview" />
+          <div className="animate-fade-in [animation-delay:100ms]">
+            <div className="card public-card max-w-2xl overflow-hidden">
+              <iframe src={site.resumeUrl} className="aspect-[8.5/11] w-full" title="Resume preview" />
+            </div>
           </div>
         </>
       ) : (
-        <div className="card flex max-w-2xl animate-fade-in flex-col items-center gap-3 p-10 text-center">
-          <FileX className="h-8 w-8 text-text-faint" />
-          <p className="text-text-muted">No resume has been uploaded yet.</p>
+        <div className="animate-fade-in">
+          <div className="card public-card flex max-w-2xl flex-col items-center gap-3 p-10 text-center">
+            <FileX className="h-8 w-8 text-text-faint" />
+            <p className="text-text-muted">No resume has been uploaded yet.</p>
+          </div>
         </div>
       )}
     </section>

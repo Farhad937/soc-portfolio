@@ -5,6 +5,7 @@ import { getExperience } from "@/lib/content/experience";
 import { getEducation } from "@/lib/content/education";
 import { getAboutPageContent } from "@/lib/content/about";
 import ProfileImageFrame from "@/components/profile-image-frame";
+import ScrollRevealGrid from "@/components/scroll-reveal-grid";
 
 export const metadata = { title: `About — ${staticSite.name}` };
 export const revalidate = 3600;
@@ -55,9 +56,9 @@ export default async function AboutPage() {
     {experience.length > 0 && (
       <section className="section border-t border-border">
         <SectionHeading kicker="// Career" title="Experience" />
-        <div className="space-y-6">
-          {experience.map((entry, index) => (
-            <div key={entry.id} className="card about-experience-card animate-slide-in p-6" style={{ animationDelay: `${index * 90}ms` }}>
+        <ScrollRevealGrid className="space-y-6">
+          {experience.map((entry) => (
+            <div key={entry.id} className="card public-card about-experience-card p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-lg font-semibold text-text">
                   {entry.position} <span className="text-text-muted">· {entry.company}</span>
@@ -88,16 +89,16 @@ export default async function AboutPage() {
               )}
             </div>
           ))}
-        </div>
+        </ScrollRevealGrid>
       </section>
     )}
 
     {education.length > 0 && (
       <section className="section border-t border-border">
         <SectionHeading kicker="// Academics" title="Education" />
-        <div className="space-y-6">
-          {education.map((entry, index) => (
-            <div key={entry.id} className="card about-education-card animate-scale-in p-6" style={{ animationDelay: `${index * 90}ms` }}>
+        <ScrollRevealGrid className="space-y-6">
+          {education.map((entry) => (
+            <div key={entry.id} className="card public-card about-education-card p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-lg font-semibold text-text">
                   {entry.degree} <span className="text-text-muted">· {entry.institution}</span>
@@ -121,7 +122,7 @@ export default async function AboutPage() {
               )}
             </div>
           ))}
-        </div>
+        </ScrollRevealGrid>
       </section>
     )}
     </>

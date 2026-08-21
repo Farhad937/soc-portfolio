@@ -2,6 +2,7 @@ import SectionHeading from "@/components/section-heading";
 import WriteupCard from "@/components/writeup-card";
 import { getWriteups } from "@/lib/content/writeups";
 import { site } from "@/lib/site";
+import ScrollRevealGrid from "@/components/scroll-reveal-grid";
 
 export const metadata = { title: `Write-ups — ${site.name}` };
 export const revalidate = 3600;
@@ -16,11 +17,11 @@ export default async function WriteupsPage() {
         title="Write-ups"
         description="Concept explanations from my own study. Never TryHackMe flags or complete room walkthroughs — the focus is always the underlying idea."
       />
-      <div className="grid gap-5 sm:grid-cols-2">
+      <ScrollRevealGrid className="grid gap-5 sm:grid-cols-2">
         {writeups.map((w, index) => (
           <WriteupCard key={w.slug} writeup={w} index={index} />
         ))}
-      </div>
+      </ScrollRevealGrid>
     </section>
   );
 }

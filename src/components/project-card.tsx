@@ -13,8 +13,7 @@ export default function ProjectCard({ project, index = 0, motion }: { project: P
     <div className="h-full">
       <Link
         href={`/projects/${project.slug}`}
-        className={`card group flex h-full flex-col justify-between p-6 ${motion === "home" ? "home-project-card" : "interactive-card animate-slide-in"}`}
-        style={motion === "home" ? undefined : { animationDelay: `${index * 80}ms` }}
+        className={`card group flex h-full flex-col justify-between p-6 ${motion === "home" ? "home-project-card" : "public-card"}`}
       >
       <div>
         <div className="mb-3 flex items-center justify-between">
