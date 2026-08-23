@@ -26,7 +26,7 @@ export default function ProjectCard({ project, index = 0, motion }: { project: P
         </div>
         <h3 className="flex items-center gap-1.5 text-lg font-semibold text-text group-hover:text-accent group-focus-visible:text-accent">
           {project.title}
-          <ArrowUpRight className="h-4 w-4 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 group-focus-visible:translate-x-0.5 group-focus-visible:-translate-y-0.5 group-focus-visible:opacity-100" />
+          <ArrowUpRight className="h-4 w-4 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-highlight group-hover:opacity-100 group-focus-visible:translate-x-0.5 group-focus-visible:-translate-y-0.5 group-focus-visible:text-highlight group-focus-visible:opacity-100" />
         </h3>
         <p className="mt-2 text-sm text-text-muted">{project.summary}</p>
       </div>

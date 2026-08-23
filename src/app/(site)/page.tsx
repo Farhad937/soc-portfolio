@@ -62,7 +62,7 @@ export default async function Home() {
       </section>
 
       {/* Currently studying strip */}
-      <section className="border-b border-border bg-bg-surface/40">
+      <section className="border-b border-border bg-bg-surface/70">
         <div className="mx-auto max-w-5xl px-6 py-8 md:px-8">
           <div className="mb-4 flex animate-slide-in items-center justify-between">
             <p className="log-divider flex-1 text-highlight">Currently Studying</p>
@@ -105,6 +105,7 @@ export default async function Home() {
             kicker="// Notes"
             title="Latest Write-ups"
             motion="home"
+            highlight
             description="Concept explanations from my own study — never TryHackMe flags or full walkthroughs."
           />
           <Link href="/writeups" className="motion-link group hidden shrink-0 items-center gap-1 text-sm text-accent transition-colors hover:text-accent-bright md:flex">

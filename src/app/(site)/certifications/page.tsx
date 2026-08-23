@@ -18,7 +18,7 @@ export default async function CertificationsPage() {
 
   return (
     <section className="section">
-      <SectionHeading kicker="// Credentials" title="Certifications" />
+      <SectionHeading kicker="// Credentials" title="Certifications" highlight />
       <ScrollRevealGrid className="grid gap-5 sm:grid-cols-2">
         {certifications.map((cert) => {
           const meta = statusMeta[cert.status];
@@ -31,7 +31,7 @@ export default async function CertificationsPage() {
               </div>
               <div className="flex items-start gap-3">
                 {cert.logo && (
-                  <img src={cert.logo} alt="" className="h-10 w-10 shrink-0 rounded-md border border-border bg-white p-1 object-contain transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3" />
+                  <img src={cert.logo} alt="" className="h-10 w-10 shrink-0 rounded-md border border-border bg-white p-1 object-contain transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 group-hover:border-highlight/70" />
                 )}
                 <div>
                   <h3 className="text-lg font-semibold text-text">{cert.name}</h3>

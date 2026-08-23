@@ -40,7 +40,7 @@ export default async function AboutPage() {
           <p className="animate-fade-in [animation-delay:175ms]">{about.securityTransition}</p>
           <p className="animate-fade-in [animation-delay:225ms]">{about.defensiveSecurityReason}</p>
 
-          <div className="log-divider about-divider">Current Focus</div>
+          <div className="log-divider about-divider text-highlight">Current Focus</div>
           <ul className="list-inside list-disc space-y-1">
             {about.currentFocus.map((item, index) => (
               <li key={item} className="animate-slide-in transition-all hover:translate-x-1 hover:text-text marker:text-accent" style={{ animationDelay: `${275 + index * 50}ms` }}>{item}</li>

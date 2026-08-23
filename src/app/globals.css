@@ -10,8 +10,8 @@
   body {
     @apply bg-bg text-text font-sans antialiased;
     background-image:
-      radial-gradient(circle at 15% 0%, rgba(79, 140, 255, 0.07), transparent 40%),
-      radial-gradient(circle at 85% 20%, rgba(56, 223, 245, 0.05), transparent 35%);
+      radial-gradient(circle at 15% 0%, rgba(79, 140, 255, 0.12), transparent 42%),
+      radial-gradient(circle at 85% 20%, rgba(64, 228, 255, 0.08), transparent 38%);
     background-attachment: fixed;
   }
 
@@ -40,7 +40,8 @@
 
 @layer components {
   .card {
-    @apply bg-bg-surface border border-border rounded-lg transition-colors duration-200;
+    @apply rounded-lg border border-border bg-gradient-to-br from-bg-surface to-bg-raised/75 transition-colors duration-200;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.025), 0 16px 36px rgba(3, 9, 18, 0.18);
   }
   .card:hover {
     @apply border-border-strong;
@@ -57,7 +58,7 @@
   .public-card:focus-visible {
     transform: translateY(-0.375rem);
     border-color: rgba(79, 140, 255, 0.7);
-    box-shadow: 0 12px 28px rgba(79, 140, 255, 0.1);
+    box-shadow: 0 18px 38px rgba(30, 91, 190, 0.18);
   }
 
   .motion-link {
@@ -87,7 +88,7 @@
   .home-project-card:focus-visible {
     transform: translateY(-0.375rem) scale(1.02);
     border-color: rgba(79, 140, 255, 0.8);
-    box-shadow: 0 14px 30px rgba(79, 140, 255, 0.12);
+    box-shadow: 0 20px 40px rgba(30, 91, 190, 0.2);
   }
   .home-project-card:hover .tag,
   .home-project-card:focus-visible .tag,
@@ -104,6 +105,7 @@
   .home-writeup-card:focus-visible {
     transform: translateY(-0.375rem) scale(1.01);
     border-color: rgba(79, 140, 255, 0.7);
+    box-shadow: 0 16px 34px rgba(30, 91, 190, 0.16);
   }
 
   .scroll-reveal-item {
@@ -133,7 +135,7 @@
   .about-profile-card:hover {
     transform: translateY(-0.375rem);
     border-color: rgba(79, 140, 255, 0.7);
-    box-shadow: 0 12px 28px rgba(79, 140, 255, 0.1);
+    box-shadow: 0 18px 38px rgba(30, 91, 190, 0.18);
   }
   .about-experience-card:hover {
     transform: translateY(-0.375rem) scale(1.01);

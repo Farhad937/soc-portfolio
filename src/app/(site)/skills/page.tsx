@@ -14,12 +14,13 @@ export default async function SkillsPage() {
       <SectionHeading
         kicker="// Capabilities"
         title="Skills"
+        highlight
         description="Organized the way I'd want a hiring manager to scan them — by domain, not chronology."
       />
       <ScrollRevealGrid className="grid gap-5 sm:grid-cols-2">
         {skillGroups.map((group) => (
           <div key={group.category} className="card public-card p-6">
-            <h3 className="mb-4 font-mono text-xs uppercase tracking-wide text-accent">
+            <h3 className="mb-4 font-mono text-xs uppercase tracking-wide text-highlight">
               {group.category}
             </h3>
             <div className="flex flex-wrap gap-2">

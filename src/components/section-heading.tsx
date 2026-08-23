@@ -3,16 +3,18 @@ export default function SectionHeading({
   title,
   description,
   motion,
+  highlight,
 }: {
   kicker: string;
   title: string;
   description?: string;
   motion?: "home" | "about";
+  highlight?: boolean;
 }) {
   const kickerMotion = motion ? "animate-slide-in" : "animate-fade-in";
   return (
     <div className="mb-12 max-w-2xl">
-      <p className={`kicker mb-3 ${kickerMotion}`}>{kicker}</p>
+      <p className={`kicker mb-3 ${kickerMotion} ${highlight ? "text-highlight" : ""}`}>{kicker}</p>
       <h2 className="animate-fade-in text-3xl font-semibold tracking-tight text-text [animation-delay:75ms] md:text-4xl">{title}</h2>
       {description && <p className="mt-4 animate-fade-in text-text-muted [animation-delay:150ms]">{description}</p>}
     </div>
