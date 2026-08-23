@@ -29,18 +29,21 @@ export default async function SearchPage() {
       title: p.title,
       description: p.summary,
       href: `/projects/${p.slug}`,
+      searchText: [p.difficulty, p.status, p.tech.join(" "), p.skills.join(" "), p.overview, p.objective, p.environment, p.toolsUsed.join(" "), p.challenges, p.investigation, p.findings, p.lessonsLearned].filter(Boolean).join(" "),
     })),
     ...writeups.map((w) => ({
       type: "Write-up" as const,
       title: w.title,
       description: w.summary,
       href: `/writeups/${w.slug}`,
+      searchText: [w.category, w.difficulty, w.concept, w.keyTakeaways.join(" ")].filter(Boolean).join(" "),
     })),
     ...skillGroups.flatMap((group) =>
       group.items.map((item) => ({
         type: "Skill" as const,
         title: item,
         description: group.category,
+        href: "/skills",
       }))
     ),
     // No individual detail routes exist for these — each links to the
@@ -52,21 +55,21 @@ export default async function SearchPage() {
       title: c.name,
       description: c.issuer,
       href: "/certifications",
-      searchText: c.skills.join(" "),
+      searchText: [c.date, c.skills.join(" ")].filter(Boolean).join(" "),
     })),
     ...experience.map((e) => ({
       type: "Experience" as const,
       title: `${e.position} · ${e.company}`,
       description: e.description ?? "",
       href: "/about",
-      searchText: [e.company, e.technologies.join(" ")].filter(Boolean).join(" "),
+      searchText: [e.company, e.location, e.start_date, e.end_date, e.technologies.join(" "), e.achievements.join(" ")].filter(Boolean).join(" "),
     })),
     ...education.map((e) => ({
       type: "Education" as const,
       title: `${e.degree} · ${e.institution}`,
       description: e.description ?? e.field_of_study ?? "",
       href: "/about",
-      searchText: [e.institution, e.field_of_study].filter(Boolean).join(" "),
+      searchText: [e.institution, e.field_of_study, e.start_date, e.end_date, e.achievements.join(" ")].filter(Boolean).join(" "),
     })),
     ...timeline.map((t) => ({
       type: "Journey" as const,

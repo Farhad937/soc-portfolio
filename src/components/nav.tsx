@@ -3,11 +3,28 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { House, Menu, X, ShieldHalf, Search } from "lucide-react";
+import { ChevronDown, House, Menu, X, ShieldHalf, Search } from "lucide-react";
 import { navLinks } from "@/lib/site";
 import type { getSiteSettings } from "@/lib/content/site-settings";
 
 type SiteSettings = Awaited<ReturnType<typeof getSiteSettings>>;
+
+const desktopNavLinks = [
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/writeups", label: "Write-ups" },
+  { href: "/skills", label: "Skills" },
+  { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
+];
+
+const learningLinks = [
+  { href: "/certifications", label: "Certifications" },
+  { href: "/tryhackme", label: "TryHackMe" },
+  { href: "/homelab", label: "Home Lab" },
+  { href: "/journey", label: "Journey" },
+  { href: "/dashboard", label: "Dashboard" },
+];
 
 // navLinks stays a static import deliberately — nav structure is
 // application configuration, not CMS content (see the CMS architecture
@@ -15,6 +32,8 @@ type SiteSettings = Awaited<ReturnType<typeof getSiteSettings>>;
 export default function Nav({ site }: { site: SiteSettings }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [learningOpen, setLearningOpen] = useState(false);
+  const learningActive = learningLinks.some((link) => pathname === link.href);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/85 backdrop-blur">
@@ -47,7 +66,59 @@ export default function Nav({ site }: { site: SiteSettings }) {
           >
             Home
           </Link>
-          {navLinks.map((link) => {
+          {desktopNavLinks.slice(0, 4).map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`motion-link nav-link whitespace-nowrap rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
+                  active ? "text-accent" : "text-text-muted hover:text-text"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <div
+            className="relative"
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) setLearningOpen(false);
+            }}
+          >
+            <button
+              type="button"
+              aria-expanded={learningOpen}
+              aria-controls="learning-menu"
+              onClick={() => setLearningOpen((isOpen) => !isOpen)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") setLearningOpen(false);
+              }}
+              className={`motion-link nav-link flex items-center gap-1 whitespace-nowrap rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
+                learningActive ? "text-accent" : "text-text-muted hover:text-text"
+              }`}
+            >
+              Learning
+              <ChevronDown className={`h-3.5 w-3.5 transition-transform ${learningOpen ? "rotate-180" : ""}`} />
+            </button>
+            {learningOpen && (
+              <div id="learning-menu" className="absolute left-0 top-full z-10 mt-2 min-w-44 rounded-md border border-border-strong bg-bg-raised p-1 shadow-lg">
+                {learningLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setLearningOpen(false)}
+                    className={`block rounded px-3 py-2 text-sm transition-colors ${
+                      pathname === link.href ? "text-accent" : "text-text-muted hover:bg-bg-surface hover:text-text"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+          {desktopNavLinks.slice(4).map((link) => {
             const active = pathname === link.href;
             return (
               <Link
