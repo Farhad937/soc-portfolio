@@ -45,7 +45,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`motion-link whitespace-nowrap rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
+                className={`motion-link nav-link whitespace-nowrap rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
                   active ? "text-accent" : "text-text-muted hover:text-text"
                 }`}
               >
@@ -82,7 +82,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
             <Link
               href="/search"
               onClick={() => setOpen(false)}
-              className={`motion-link flex items-center gap-2 rounded-md px-3 py-2.5 text-sm ${
+              className={`motion-link nav-link flex items-center gap-2 rounded-md px-3 py-2.5 text-sm ${
                 pathname === "/search" ? "text-accent" : "text-text-muted"
               }`}
             >
@@ -93,7 +93,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`motion-link rounded-md px-3 py-2.5 text-sm ${
+                className={`motion-link nav-link rounded-md px-3 py-2.5 text-sm ${
                   pathname === link.href ? "text-accent" : "text-text-muted"
                 }`}
               >

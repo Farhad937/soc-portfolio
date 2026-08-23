@@ -80,6 +80,9 @@
   .motion-link:focus-visible::after {
     transform: scaleX(1);
   }
+  .nav-link::after {
+    @apply bg-highlight;
+  }
 
   .home-project-card {
     transition: transform 300ms ease-out, border-color 300ms ease-out, box-shadow 300ms ease-out;
