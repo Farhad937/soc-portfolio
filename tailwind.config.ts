@@ -6,25 +6,26 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: "#0a0e14",
-          surface: "#10151d",
-          raised: "#161c26",
+          DEFAULT: "#0d131e",
+          surface: "#151f2d",
+          raised: "#1c2939",
         },
         border: {
-          DEFAULT: "#1c2530",
-          strong: "#293445",
+          DEFAULT: "#2a3a50",
+          strong: "#3b4e68",
         },
         text: {
-          DEFAULT: "#e6e9ef",
-          muted: "#8b95a7",
-          faint: "#5b6577",
+          DEFAULT: "#edf2fa",
+          muted: "#a2aec1",
+          faint: "#748197",
         },
         accent: {
           DEFAULT: "#4f8cff",
-          dim: "#2f5cc4",
-          bright: "#7cabff",
+          dim: "#376fd6",
+          bright: "#90b9ff",
         },
-        trace: "#22d3ee",
+        trace: "#38dff5",
+        highlight: "#ffce1b",
         success: "#34d399",
         warning: "#fbbf24",
         danger: "#f87171",

@@ -11,7 +11,7 @@
     @apply bg-bg text-text font-sans antialiased;
     background-image:
       radial-gradient(circle at 15% 0%, rgba(79, 140, 255, 0.07), transparent 40%),
-      radial-gradient(circle at 85% 20%, rgba(34, 211, 238, 0.05), transparent 35%);
+      radial-gradient(circle at 85% 20%, rgba(56, 223, 245, 0.05), transparent 35%);
     background-attachment: fixed;
   }
 

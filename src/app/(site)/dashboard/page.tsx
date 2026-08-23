@@ -32,7 +32,7 @@ export default async function DashboardPage() {
   const stats = [
     { label: "Projects Completed", value: `${projectsCompleted} / ${projects.length}`, icon: FolderKanban },
     { label: "Write-ups Published", value: writeupsPublished, icon: NotebookText },
-    { label: "Learning Hours", value: site.learningHours, icon: Clock3 },
+    { label: "Learning Hours", value: site.learningHours, icon: Clock3, highlight: true },
     { label: "Certificates Earned", value: `${certsEarned} / ${certifications.length}`, icon: BadgeCheck },
     { label: "TryHackMe Rooms", value: `${thmRoomsCompleted} / ${thmRoomsTotal}`, icon: Terminal },
     { label: "GitHub Repositories", value: site.githubRepos, icon: Github },
@@ -48,10 +48,10 @@ export default async function DashboardPage() {
       />
 
       <ScrollRevealGrid className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {stats.map(({ label, value, icon: Icon }) => (
+        {stats.map(({ label, value, icon: Icon, highlight }) => (
           <div key={label} className="card public-card p-6">
             <div className="mb-4 flex items-center justify-between">
-              <Icon className="h-5 w-5 text-accent" />
+              <Icon className={`h-5 w-5 ${highlight ? "text-highlight" : "text-accent"}`} />
               <span className="font-mono text-[11px] uppercase tracking-wide text-text-faint">
                 {label}
               </span>
@@ -62,7 +62,7 @@ export default async function DashboardPage() {
       </ScrollRevealGrid>
 
       <div className="mt-12">
-        <p className="log-divider mb-4">By TryHackMe Path</p>
+        <p className="log-divider mb-4 text-highlight">By TryHackMe Path</p>
         <ScrollRevealGrid className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {thmPaths.map((path) => (
             <div key={path.name} className="card public-card p-4">

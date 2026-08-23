@@ -65,14 +65,14 @@ export default async function Home() {
       <section className="border-b border-border bg-bg-surface/40">
         <div className="mx-auto max-w-5xl px-6 py-8 md:px-8">
           <div className="mb-4 flex animate-slide-in items-center justify-between">
-            <p className="log-divider flex-1">Currently Studying</p>
+            <p className="log-divider flex-1 text-highlight">Currently Studying</p>
             <Link href="/dashboard" className="motion-link ml-4 shrink-0 font-mono text-[11px] uppercase tracking-wide text-text-faint transition-colors hover:text-accent">
               View Dashboard →
             </Link>
           </div>
           <div className="flex flex-wrap gap-2">
             {site.currentlyStudying.map((s, index) => (
-              <span key={s} className="tag animate-scale-in transition-all hover:-translate-y-0.5 hover:border-accent/70 hover:bg-accent/10 hover:text-text" style={{ animationDelay: `${100 + index * 60}ms` }}>{s}</span>
+              <span key={s} className="tag animate-scale-in transition-all hover:-translate-y-0.5 hover:border-highlight/70 hover:bg-highlight/10 hover:text-text" style={{ animationDelay: `${100 + index * 60}ms` }}>{s}</span>
             ))}
           </div>
         </div>
