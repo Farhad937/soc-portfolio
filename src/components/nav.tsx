@@ -39,6 +39,14 @@ export default function Nav({ site }: { site: SiteSettings }) {
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
+          <Link
+            href="/"
+            className={`motion-link nav-link whitespace-nowrap rounded-md px-3 py-2 text-sm transition-all hover:-translate-y-px ${
+              pathname === "/" ? "text-accent" : "text-text-muted hover:text-text"
+            }`}
+          >
+            Home
+          </Link>
           {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
