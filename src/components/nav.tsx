@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, ShieldHalf, Search } from "lucide-react";
+import { House, Menu, X, ShieldHalf, Search } from "lucide-react";
 import { navLinks } from "@/lib/site";
 import type { getSiteSettings } from "@/lib/content/site-settings";
 
@@ -33,7 +33,7 @@ export default function Nav({ site }: { site: SiteSettings }) {
       </div>
 
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
-        <Link href="/" className="group flex items-center gap-2 font-semibold tracking-tight">
+        <Link href="/" onClick={() => setOpen(false)} className="group flex items-center gap-2 font-semibold tracking-tight">
           <ShieldHalf className="h-5 w-5 text-accent transition-transform duration-200 group-hover:-rotate-3 group-focus-visible:-rotate-3" strokeWidth={2} />
           <span>{site.name}</span>
         </Link>
@@ -79,6 +79,15 @@ export default function Nav({ site }: { site: SiteSettings }) {
       {open && (
         <nav className="animate-slide-in border-t border-border bg-bg px-6 py-4 lg:hidden">
           <div className="flex flex-col gap-1">
+            <Link
+              href="/"
+              onClick={() => setOpen(false)}
+              className={`motion-link nav-link flex items-center gap-2 rounded-md px-3 py-2.5 text-sm ${
+                pathname === "/" ? "text-accent" : "text-text-muted"
+              }`}
+            >
+              <House className="h-4 w-4" /> Home
+            </Link>
             <Link
               href="/search"
               onClick={() => setOpen(false)}

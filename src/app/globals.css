@@ -47,6 +47,15 @@
     @apply border-border-strong;
   }
 
+  @media (hover: hover) and (pointer: fine) {
+    .profile-image-frame:hover {
+      border-color: rgba(79, 140, 255, 0.6);
+    }
+    .profile-image-frame:hover .profile-image {
+      transform: scale(1.025) rotate(3deg);
+    }
+  }
+
   .interactive-card {
     @apply transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/60 focus-visible:-translate-y-1 focus-visible:scale-[1.01] focus-visible:border-accent/60;
   }

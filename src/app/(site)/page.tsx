@@ -37,16 +37,16 @@ export default async function Home() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link href={site.heroButtons[0].url} className="btn-primary group animate-scale-in hover:-translate-y-1 hover:scale-[1.02] [animation-delay:225ms]">
+              <Link href={site.heroButtons[0].url} className="btn-primary group w-full animate-scale-in hover:-translate-y-1 hover:scale-[1.02] sm:w-auto [animation-delay:225ms]">
                 {site.heroButtons[0].label} <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 group-focus-visible:translate-x-1" />
               </Link>
-              <Link href={site.heroButtons[1].url} className="btn-secondary animate-scale-in hover:-translate-y-1 hover:border-accent hover:bg-bg-surface [animation-delay:275ms]">
+              <Link href={site.heroButtons[1].url} className="btn-secondary w-full animate-scale-in hover:-translate-y-1 hover:border-accent hover:bg-bg-surface sm:w-auto [animation-delay:275ms]">
                 {site.heroButtons[1].label}
               </Link>
-              <Link href={site.heroButtons[2].url} className="btn-secondary group animate-scale-in hover:-translate-y-1 hover:border-accent [animation-delay:325ms]">
+              <Link href={site.heroButtons[2].url} className="btn-secondary group w-full animate-scale-in hover:-translate-y-1 hover:border-accent sm:w-auto [animation-delay:325ms]">
                 <FileDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5 group-focus-visible:translate-y-0.5" /> {site.heroButtons[2].label}
               </Link>
-              <Link href={site.heroButtons[3].url} className="btn-secondary group animate-scale-in hover:-translate-y-1 hover:border-accent [animation-delay:375ms]">
+              <Link href={site.heroButtons[3].url} className="btn-secondary group w-full animate-scale-in hover:-translate-y-1 hover:border-accent sm:w-auto [animation-delay:375ms]">
                 <Mail className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:-rotate-6 group-focus-visible:-translate-y-0.5 group-focus-visible:-rotate-6" /> {site.heroButtons[3].label}
               </Link>
             </div>
