@@ -1,7 +1,7 @@
 import SectionHeading from "@/components/section-heading";
 import { getCertifications } from "@/lib/content/certifications";
 import { site } from "@/lib/site";
-import { BadgeCheck, Clock, CalendarClock } from "lucide-react";
+import { BadgeCheck, Clock, CalendarClock, ExternalLink } from "lucide-react";
 import ScrollRevealGrid from "@/components/scroll-reveal-grid";
 
 export const metadata = { title: `Certifications — ${site.name}` };
@@ -43,6 +43,17 @@ export default async function CertificationsPage() {
                   <span key={s} className="tag">{s}</span>
                 ))}
               </div>
+              {cert.credentialUrl && (
+                <a
+                  href={cert.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent-bright"
+                >
+                  Verify Credential
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              )}
             </div>
           );
         })}
