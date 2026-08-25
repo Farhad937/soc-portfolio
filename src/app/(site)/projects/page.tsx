@@ -1,10 +1,15 @@
 import SectionHeading from "@/components/section-heading";
 import ProjectCard from "@/components/project-card";
 import { getProjects } from "@/lib/content/projects";
-import { site } from "@/lib/site";
+import { getStaticPageMetadata } from "@/lib/content/seo";
 import ScrollRevealGrid from "@/components/scroll-reveal-grid";
+/* Legacy static metadata is intentionally retained below for reference.
 
 export const metadata = { title: `Projects — ${site.name}` };
+*/
+export async function generateMetadata() {
+  return getStaticPageMetadata("/projects");
+}
 export const revalidate = 3600;
 
 export default async function ProjectsPage() {

@@ -1,8 +1,14 @@
 import SectionHeading from "@/components/section-heading";
 import { getTimeline } from "@/lib/content/timeline";
-import { site } from "@/lib/site";
+import { getStaticPageMetadata } from "@/lib/content/seo";
+
+/* Legacy static metadata is intentionally retained below for reference.
 
 export const metadata = { title: `Learning Journey — ${site.name}` };
+*/
+export async function generateMetadata() {
+  return getStaticPageMetadata("/journey");
+}
 export const revalidate = 3600;
 
 export default async function JourneyPage() {

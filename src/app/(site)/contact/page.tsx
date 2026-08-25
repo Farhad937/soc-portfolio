@@ -1,9 +1,15 @@
 import SectionHeading from "@/components/section-heading";
 import { Github, Linkedin, Mail, MapPin, Terminal } from "lucide-react";
-import { site as staticSite } from "@/lib/site";
+import { getStaticPageMetadata } from "@/lib/content/seo";
 import { getSiteSettings } from "@/lib/content/site-settings";
 
+/* Legacy static metadata is intentionally retained below for reference.
+
 export const metadata = { title: `Contact — ${staticSite.name}` };
+*/
+export async function generateMetadata() {
+  return getStaticPageMetadata("/contact");
+}
 export const revalidate = 3600;
 
 export default async function ContactPage() {

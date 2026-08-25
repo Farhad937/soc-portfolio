@@ -4,6 +4,7 @@ import { ArrowLeft, Github } from "lucide-react";
 import { getProjects, getProjectBySlug } from "@/lib/content/projects";
 import type { Project } from "@/lib/projects";
 import RichText from "@/components/rich-text";
+import { buildMetadata } from "@/lib/content/seo";
 
 export const revalidate = 3600;
 
@@ -12,9 +13,23 @@ export async function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
 
+/* Legacy metadata is retained below for reference.
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const project = await getProjectBySlug(params.slug);
   return { title: project ? `${project.title} — Project` : "Project not found" };
+}
+
+*/
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const project = await getProjectBySlug(params.slug);
+  if (!project) return { title: "Project not found", robots: { index: false, follow: false } };
+  return buildMetadata({
+    route: `/projects/${project.slug}`,
+    fallbackTitle: `${project.title} — Project`,
+    fallbackDescription: project.summary || project.overview || "Defensive security project documentation.",
+    fallbackImage: project.featuredImage,
+    type: "article",
+  });
 }
 
 // `rich: true` fields render through the Markdown renderer; existing

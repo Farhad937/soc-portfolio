@@ -9,8 +9,13 @@ import WriteupCard from "@/components/writeup-card";
 import SectionHeading from "@/components/section-heading";
 import ProfileImageFrame from "@/components/profile-image-frame";
 import ScrollRevealGrid from "@/components/scroll-reveal-grid";
+import { getStaticPageMetadata } from "@/lib/content/seo";
 
 export const revalidate = 3600; // ISR: re-fetch from Supabase at most once/hour
+
+export async function generateMetadata() {
+  return getStaticPageMetadata("/");
+}
 
 export default async function Home() {
   const [site, projects, writeups, about] = await Promise.all([

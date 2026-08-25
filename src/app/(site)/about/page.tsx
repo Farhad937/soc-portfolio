@@ -1,13 +1,18 @@
 import SectionHeading from "@/components/section-heading";
-import { site as staticSite } from "@/lib/site";
+import { getStaticPageMetadata } from "@/lib/content/seo";
 import { getSiteSettings } from "@/lib/content/site-settings";
 import { getExperience } from "@/lib/content/experience";
 import { getEducation } from "@/lib/content/education";
 import { getAboutPageContent } from "@/lib/content/about";
 import ProfileImageFrame from "@/components/profile-image-frame";
 import ScrollRevealGrid from "@/components/scroll-reveal-grid";
+/* Legacy static metadata is intentionally retained below for reference.
 
 export const metadata = { title: `About — ${staticSite.name}` };
+*/
+export async function generateMetadata() {
+  return getStaticPageMetadata("/about");
+}
 export const revalidate = 3600;
 
 export default async function AboutPage() {

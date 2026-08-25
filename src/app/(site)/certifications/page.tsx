@@ -1,10 +1,15 @@
 import SectionHeading from "@/components/section-heading";
 import { getCertifications } from "@/lib/content/certifications";
-import { site } from "@/lib/site";
+import { getStaticPageMetadata } from "@/lib/content/seo";
 import { BadgeCheck, Clock, CalendarClock, ExternalLink } from "lucide-react";
 import ScrollRevealGrid from "@/components/scroll-reveal-grid";
+/* Legacy static metadata is intentionally retained below for reference.
 
 export const metadata = { title: `Certifications — ${site.name}` };
+*/
+export async function generateMetadata() {
+  return getStaticPageMetadata("/certifications");
+}
 export const revalidate = 3600;
 
 const statusMeta = {

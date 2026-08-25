@@ -100,6 +100,23 @@ create table certifications (
 create index certifications_content_status_idx on certifications (content_status);
 
 -- ---------------------------------------------------------------------
+-- seo_metadata â€” optional CMS overrides for public static page metadata
+-- ---------------------------------------------------------------------
+create table seo_metadata (
+  route text primary key check (route in (
+    '/', '/about', '/projects', '/writeups', '/skills', '/certifications',
+    '/journey', '/homelab', '/resume', '/contact', '/tryhackme'
+  )),
+  title text,
+  description text,
+  og_title text,
+  og_description text,
+  og_image text,
+  canonical_url text,
+  updated_at timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------------
 -- timeline_entries
 -- ---------------------------------------------------------------------
 create table timeline_entries (
@@ -163,6 +180,7 @@ alter table site_settings enable row level security;
 alter table projects enable row level security;
 alter table writeups enable row level security;
 alter table certifications enable row level security;
+alter table seo_metadata enable row level security;
 alter table timeline_entries enable row level security;
 alter table skill_groups enable row level security;
 alter table skills enable row level security;
@@ -182,6 +200,9 @@ create policy "writeups public read" on writeups
 
 create policy "certifications public read" on certifications
   for select using (content_status = 'published');
+
+create policy "seo_metadata public read" on seo_metadata
+  for select using (true);
 
 create policy "timeline_entries public read" on timeline_entries
   for select using (content_status = 'published');

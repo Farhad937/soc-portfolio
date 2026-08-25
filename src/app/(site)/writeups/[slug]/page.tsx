@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Clock } from "lucide-react";
 import { getWriteups, getWriteupBySlug } from "@/lib/content/writeups";
 import RichText from "@/components/rich-text";
+import { buildMetadata } from "@/lib/content/seo";
 
 export const revalidate = 3600;
 
@@ -11,9 +12,22 @@ export async function generateStaticParams() {
   return writeups.map((w) => ({ slug: w.slug }));
 }
 
+/* Legacy metadata is retained below for reference.
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const writeup = await getWriteupBySlug(params.slug);
   return { title: writeup ? `${writeup.title} — Write-up` : "Write-up not found" };
+}
+
+*/
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const writeup = await getWriteupBySlug(params.slug);
+  if (!writeup) return { title: "Write-up not found", robots: { index: false, follow: false } };
+  return buildMetadata({
+    route: `/writeups/${writeup.slug}`,
+    fallbackTitle: `${writeup.title} — Write-up`,
+    fallbackDescription: writeup.summary || writeup.concept || "Cybersecurity concept explanation.",
+    type: "article",
+  });
 }
 
 export default async function WriteupDetailPage({ params }: { params: { slug: string } }) {

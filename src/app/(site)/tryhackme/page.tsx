@@ -1,10 +1,15 @@
 import SectionHeading from "@/components/section-heading";
 import { getThmPaths } from "@/lib/content/tryhackme";
-import { site } from "@/lib/site";
+import { getStaticPageMetadata } from "@/lib/content/seo";
 import { CheckCircle2, CircleDashed, CircleDot } from "lucide-react";
 import ScrollRevealGrid from "@/components/scroll-reveal-grid";
+/* Legacy static metadata is intentionally retained below for reference.
 
 export const metadata = { title: `TryHackMe Progress — ${site.name}` };
+*/
+export async function generateMetadata() {
+  return getStaticPageMetadata("/tryhackme");
+}
 export const revalidate = 3600;
 
 const roomStatusIcon = {

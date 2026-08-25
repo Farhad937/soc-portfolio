@@ -101,6 +101,20 @@ export type Database = {
         Insert: Partial<Database["public"]["Tables"]["certifications"]["Row"]>;
         Update: Partial<Database["public"]["Tables"]["certifications"]["Row"]>;
       };
+      seo_metadata: {
+        Row: {
+          route: string;
+          title: string | null;
+          description: string | null;
+          og_title: string | null;
+          og_description: string | null;
+          og_image: string | null;
+          canonical_url: string | null;
+          updated_at: string;
+        };
+        Insert: Partial<Database["public"]["Tables"]["seo_metadata"]["Row"]>;
+        Update: Partial<Database["public"]["Tables"]["seo_metadata"]["Row"]>;
+      };
       timeline_entries: {
         Row: {
           id: string;

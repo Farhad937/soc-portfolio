@@ -6,10 +6,19 @@ import { site } from "@/lib/site";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jbmono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jbmono" });
 
+/* Superseded root metadata note retained below for historical context.
 // Metadata generation runs separately from the page tree and can't
 // easily share a per-request fetch, so it still reads the static site
 // object. Wiring SEO metadata to the CMS is Phase 25, not Phase 1/2 —
 // noted deliberately rather than silently left half-done.
+export const metadata: Metadata = {
+  title: `${site.name} — ${site.role}`,
+  description: site.tagline,
+};
+*/
+
+// Public route segments provide CMS-managed metadata. This remains the
+// safe site-wide fallback for routes that intentionally do not use SEO CMS.
 export const metadata: Metadata = {
   title: `${site.name} — ${site.role}`,
   description: site.tagline,

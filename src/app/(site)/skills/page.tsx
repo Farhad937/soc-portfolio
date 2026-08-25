@@ -1,9 +1,14 @@
 import SectionHeading from "@/components/section-heading";
 import { getSkillGroups } from "@/lib/content/skills";
-import { site } from "@/lib/site";
+import { getStaticPageMetadata } from "@/lib/content/seo";
 import ScrollRevealGrid from "@/components/scroll-reveal-grid";
+/* Legacy static metadata is intentionally retained below for reference.
 
 export const metadata = { title: `Skills — ${site.name}` };
+*/
+export async function generateMetadata() {
+  return getStaticPageMetadata("/skills");
+}
 export const revalidate = 3600;
 
 export default async function SkillsPage() {
